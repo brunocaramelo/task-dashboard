@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Task;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class CommentTask extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'task_comments';
     protected $fillable = [
         'message',

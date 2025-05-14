@@ -5,50 +5,76 @@ namespace App\Repositories;
 use App\Models\Task;
 use App\Interfaces\TaskInterface;
 
+use App\Models\StatusTask;
 class TaskRepository implements TaskInterface
-{    private $model = Task::class;
+{
+    private $model = Task::class;
 
     public function searchPaginate(array $filters)
     {
-        return $this->model::with(['person'])
-                ->when(!empty($filters['name']), function ($query) use ($filters) {
-                    $query->where('name', 'LIKE' ,'%'.$filters['name'].'%');
-                })
-                ->when(!empty($filters['email']), function ($query) use ($filters) {
-                    $query->where('email', 'LIKE' ,'%'.$filters['email'].'%');
-                })
-                ->paginate($filters['page_limit'] ?? 10);
+        return cache()->tags(['tasksList'])
+            ->remember('tasksList:'.json_encode($filters), config('cache.default_duration'), function () use ($filters){
+                return $this->searchPaginateQuery($filters)
+                            ->paginate($filters['page_limit'] ?? 10);
+        });
     }
-    public function findByEmail(string $email)
+
+    private function searchPaginateQuery($filters)
     {
-        return $this->model::where('email', $email)
-                ->get();
+        return $this->model::when(!empty($filters['title']), function ($query) use ($filters) {
+            $query->where('tasks.title', 'LIKE' ,'%'.$filters['title'].'%');
+        })
+        ->when(!empty($filters['code']), function ($query) use ($filters) {
+            $query->where('tasks.code', 'LIKE' ,'%'.$filters['code'].'%');
+        })
+        ->when(!empty($filters['status']), function ($query) use ($filters) {
+            $query->where('tasks.status_id', '=' ,$filters['status']);
+        })
+        ->when(!empty($filters['is_cancelled']), function ($query) use ($filters) {
+            $query->isCancelled();
+        })
+        ->join('status_tasks', 'status_tasks.id', '=', 'tasks.status_id');
     }
+
 
     public function update(array $data, $id)
     {
-        return User::find($id)->update($data);
+        $this->model::find($id)->update($data);
+
+        return $this->model::find($id);
     }
 
     public function create(array $data)
     {
-        $user = User::create($data);
+        return $this->model::create($data);
+    }
+    public function getItem($idItem)
+    {
+        return cache()->tags(['taskItem'])
+                ->remember('taskItem:'.$idItem, config('cache.default_duration'), function () use ($idItem){
+                    return $this->getEagerLoadQuery()
+                                ->where('tasks.id', $idItem)
+                                ->first();
+        });
+    }
 
-        $person = $user->person()->create([
-            'name' => $data['name'],
-            'lastname' => $data['lastname'],
-            'cep' => str_replace([' ','-'],['',''], $data['cep']),
-            'street' => $data['street'],
-            'city' => $data['city'],
-            'street_number' => $data['street_number'],
-            'state' => $data['state'],
-            'neighborhood' => $data['neighborhood'],
+    public function getEagerLoadQuery()
+    {
+        return $this->model::with([
+            'comments:id,message',
+            'comments.responsible:id,name,email',
+            'rapporteur:id,name,email',
+            'responsable:id,name,email',
+            'status:id,name,slug',
         ]);
+    }
 
-        $user->person_id = $person->id;
-
-        $user->save();
-
-        return $user;
+    public function getStatusList()
+    {
+        return cache()->tags(['statusTask'])
+                ->remember('statusTask' ,config('cache.default_duration'), function (){
+                    return StatusTask::select(['id', 'name', 'slug'])
+                                    ->get();
+        });
     }
 }
