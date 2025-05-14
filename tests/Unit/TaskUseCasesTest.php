@@ -1,8 +1,12 @@
 <?php
 
-use App\Services\TaskService;
-use App\Repositories\TaskRepository;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Services\{TaskService,
+                CommentTaskService
+                };
+
+use App\Repositories\{TaskRepository,
+                      CommentTaskRepository
+                    };
 
 use Database\Seeders\Tests\{TaskTesterSeeder,
                             StatusTaskTesterSeeder,
@@ -17,6 +21,7 @@ beforeEach(function () {
     runSeeder(TaskTesterSeeder::class);
 
     $this->taskService = new TaskService(new TaskRepository());
+    $this->commentTaskService = new CommentTaskService(new CommentTaskRepository());
 
 });
 
@@ -69,4 +74,32 @@ it('should call getStatusList on the repository', function () {
     $result = $this->taskService->getStatusList()->pluck('slug')->toArray();
 
     expect($result)->toBe($statusList);
+});
+
+it('should call insert comment task on the repository', function () {
+    $data = [
+            'message' => 'Comentando',
+            'task_id' => 1,
+            'responsible_id' => 2
+            ];
+
+    $result = $this->commentTaskService->create($data);
+
+    expect($result->task_id)->toBe($data['task_id']);
+});
+
+it('should call update comment task on the repository', function () {
+    $data = [
+            'message' => 'Comentando',
+            'task_id' => 1,
+            'responsible_id' => 2
+            ];
+
+    $resultInsert = $this->commentTaskService->create($data);
+
+    $data['message'] = 'Mudei';
+
+    $result = $this->commentTaskService->update($data ,$resultInsert->id);
+
+    expect($result->message)->toBe($data['message']);
 });

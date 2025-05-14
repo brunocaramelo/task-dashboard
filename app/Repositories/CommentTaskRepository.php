@@ -11,7 +11,9 @@ class CommentTaskRepository implements CommentTaskInterface
 
     public function update(array $data, $id)
     {
-        return $this->model::find($id)->update($data);
+        $this->model::find($id)->update($data);
+
+        return $this->model::find($id);
     }
 
     public function create(array $data)
