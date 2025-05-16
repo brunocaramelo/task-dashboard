@@ -37,8 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::group(['prefix'=>'tasks','as'=>'tasks.'], function(){
-        Route::get('/', action: [TaskBoardController::class, 'search'])->name('dashboard');
-        // Route::get('connect', 'QuoteController@create')->name('create');
+        Route::get('/', [TaskBoardController::class, 'search'])->name('dashboard');
+        Route::get('/new',  [TaskBoardController::class, 'createForm'])->name('form-create');
+        Route::post('/',  [TaskBoardController::class, 'create'])->name('form-create');
     });
 });
 

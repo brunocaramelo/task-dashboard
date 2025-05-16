@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('rapporteur_id');
             $table->bigInteger('responsible_id')->nullable();
             $table->bigInteger('status_id');
+            $table->longText('description')->nullable();
 
 
             $table->foreign('responsible_id')->references('id')->on('users');

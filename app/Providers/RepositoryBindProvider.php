@@ -13,6 +13,7 @@ class RepositoryBindProvider extends ServiceProvider
     {
         $this->app->bind('App\Interfaces\TaskInterface', 'App\Repositories\TaskRepository');
         $this->app->bind('App\Interfaces\CommentTaskInterface', 'App\Repositories\CommentTaskRepository');
+        $this->app->bind('App\Interfaces\UserInterface', 'App\Repositories\UserRepository');
     }
 
     /**
