@@ -31,5 +31,14 @@ class TaskService
     {
         return $this->taskRepository->getStatusList();
     }
+    public function getStatusWithAllItemList()
+    {
+        $falseItem = new \App\Models\StatusTask();
+        $falseItem->name = 'All';
+
+        $list = $this->taskRepository->getStatusList()->push($falseItem);
+
+        return $list;
+    }
 
 }
