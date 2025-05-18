@@ -32,7 +32,10 @@
                                     <th scope="col" class="px-5 py-3">Code</th>
                                     <th scope="col" class="px-5 py-3 text-center">Title</th>
                                     <th scope="col" class="px-5 py-3 text-center">Status</th>
-                                    <th scope="col" class="px-5 py-3 mx-2 text-center">Created At</th>
+                                    <th scope="col" class="px-5 py-3 mx-2 text-center">
+                                        <a href="#" @click.prevent="toggleOrderDate" class="toggle-link">
+                                            {{ isToggled.value ? '&uparrow;' : '&downarrow;' }}
+                                        </a> Created At</th>
                                     <th scope="col" class="px-5 py-3 mx-2 text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -80,7 +83,7 @@
     import Pagination from '../../../Components/Pagination.vue';
     import { Head, router } from '@inertiajs/vue3';
     import { useSearchStore } from '../../../States/useSearchStore';
-    import { onMounted , computed } from 'vue';
+    import { onMounted , computed, ref } from 'vue';
 
     const props = defineProps({
         params: Object,
@@ -89,20 +92,20 @@
     });
 
     const searchStore = useSearchStore();
+    const searchParams = computed(() => searchStore.searchParams);
+    const isToggled = ref(true);
 
     onMounted(() => {
         searchStore.setRoute(route("tasks.dashboard"));
         searchStore.setInitialData(props.results);
     });
 
-    const gotoNewItem = () => {
-        router.visit(route("tasks.form-create"));
-    }
+    const toggleOrderDate = () => {
+      isToggled.value = !isToggled.value;
+      searchStore.searchParams.order_sense = (isToggled.value ? 'DESC' : 'ASC')
+      searchStore.searchParams.order_field = 'tasks.created_at'
 
-    const gotoEditItem = (taskId) => {
-        router.visit(route("tasks.form-update", { id: taskId }));
+      searchStore.onSearch();
     }
-
-    const searchParams = computed(() => searchStore.searchParams);
 
 </script>

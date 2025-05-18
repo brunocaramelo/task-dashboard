@@ -4,9 +4,11 @@ import { router } from '@inertiajs/vue3'
 
 export const useSearchStore = defineStore('search', () => {
     const searchParams = ref({
-        status: '',
-        title: '',
-        code: '',
+        status: null,
+        title: null,
+        code: null,
+        order_field: null,
+        order_sense: null,
     });
 
     const routeName = ref('');
