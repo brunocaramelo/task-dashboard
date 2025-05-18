@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
-            $table->string('code')->unique();
+            $table->string('code')->nullable()->unique();
             $table->bigInteger('rapporteur_id');
             $table->bigInteger('responsible_id')->nullable();
             $table->bigInteger('status_id');

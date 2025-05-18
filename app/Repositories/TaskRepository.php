@@ -46,7 +46,11 @@ class TaskRepository implements TaskInterface
 
     public function create(array $data)
     {
-        return $this->model::create($data);
+        $creater = $this->model::create($data);
+        $creater->code = 'PBI-'.$creater->id;
+        $creater->save();
+
+        return $creater;
     }
     public function getItem($idItem)
     {

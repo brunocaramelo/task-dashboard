@@ -18,8 +18,13 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@primevue/themes": "^4.3.4",
         "laravel-echo": "^2.1.0",
         "pinia": "^3.0.2",
-        "pusher-js": "^8.4.0"
+        "primeflex": "^4.0.0",
+        "primeicons": "^7.0.0",
+        "primevue": "^3.53.1",
+        "pusher-js": "^8.4.0",
+        "zod": "^3.24.4"
     }
 }

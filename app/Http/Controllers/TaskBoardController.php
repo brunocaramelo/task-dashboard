@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use Inertia\Response;
+use App\Http\Requests\{TaskCreateRequest};
+
 
 use App\Services\{TaskService,
                  UsersService};
@@ -45,9 +43,15 @@ class TaskBoardController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(TaskCreateRequest $request)
     {
+        $response = $this->taskService->create($request->validated());
 
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Created with success',
+            'data' => $response,
+            ], 201);
     }
 
 
