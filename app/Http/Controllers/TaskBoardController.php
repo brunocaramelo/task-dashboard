@@ -6,7 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use App\Http\Requests\{TaskCreateRequest};
+use App\Http\Requests\{TaskCreateRequest,
+                      TaskUpdateRequest};
 
 
 use App\Services\{TaskService,
@@ -50,6 +51,25 @@ class TaskBoardController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Created with success',
+            'data' => $response,
+            ], 201);
+    }
+    public function updateForm($id)
+    {
+        return Inertia::render('Tasks/Edit', [
+            'users' => $this->usersService->searchGet([]),
+            'statusList' => $this->taskService->getStatusList(),
+            'task' => $this->taskService->getItem($id),
+        ]);
+    }
+
+    public function update($id, TaskUpdateRequest $request)
+    {
+        $response = $this->taskService->update($request->validated(), $id);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Updated with success',
             'data' => $response,
             ], 201);
     }

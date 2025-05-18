@@ -1,23 +1,19 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TaskBoardController;
+use App\Http\Controllers\{TaskBoardController,
+                         HomeController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect()->route('dashboard.index');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['prefix'=>'dashboard', 'as'=>'dashboard.'], function(){
+    Route::get('/', [HomeController::class, 'dashboard'])->name(name: 'index');
+})->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
 
@@ -25,10 +21,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::group(['prefix'=>'tasks','as'=>'tasks.'], function(){
+    Route::group(['prefix'=>'tasks', 'as'=>'tasks.'], function(){
         Route::get('/', [TaskBoardController::class, 'search'])->name('dashboard');
+
         Route::get('/new',  [TaskBoardController::class, 'createForm'])->name('form-create');
         Route::post('/',  [TaskBoardController::class, 'create'])->name('send-create');
+
+        Route::get("/{id}",  [TaskBoardController::class, 'updateForm'])->name('form-update');
+        Route::put('/{id}',  [TaskBoardController::class, 'update'])->name('send-update');
     });
 });
 

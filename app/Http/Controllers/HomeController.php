@@ -2,20 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-use App\Services\AuthService;
-
+use App\Services\TaskService;
 class HomeController extends Controller
 {
-    private $authService;
-    public function __construct(AuthService $authService)
+    private $taskService;
+    public function __construct(TaskService $taskService)
     {
-        $this->authService = $authService;
+        $this->taskService = $taskService;
     }
 
-    public function searchUsers(Request $filters)
+    public function dashboard()
     {
-        return $this->authService->searchUsers($filters->all());
+        return Inertia::render('Dashboard', [
+            'lastsTasks' => $this->taskService->searchPaginate([
+                'page_limit' => 4,
+            ]),
+            'counters' => $this->getCountersByStatus(),
+        ]);
+    }
+
+    private function getCountersByStatus()
+    {
+        $list = [];
+
+        $listStatus = $this->taskService->getStatusList();
+
+        foreach($listStatus as $status) {
+            $list[] = [
+                'code' => $status->code,
+                'name' => $status->name,
+                'total' => $this->taskService->searchPaginate([
+                    'page_limit' => 1,
+                    'status' => $status->id
+                ])->total(),
+            ];
+        }
+
+        return $list;
     }
 }

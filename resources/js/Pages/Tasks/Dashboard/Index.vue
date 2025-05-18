@@ -11,17 +11,15 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <span class="flex flex-col lg:items-start">
                                 <div class="relative w-50 lg:w-[500px] md:w-full">
-                                    <div class="grid grid-cols-4 gap-4">
-                                        <input type="text" v-model="searchStore.searchParams.code"   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Code...">
-                                        <input type="text" v-model="searchStore.searchParams.title"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Title...">
-                                        <select v-model="searchStore.searchParams.status" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <input type="text" v-model="searchStore.searchParams.code" @blur="searchStore.onSearch()"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Code...">
+                                        <input type="text" v-model="searchStore.searchParams.title" @blur="searchStore.onSearch()"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Title...">
+                                        <select v-model="searchStore.searchParams.status" @change="searchStore.onSearch()" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                             <option value="" disabled>Select a status</option>
                                             <option v-for="status in statusList" :key="status.id" :value="status.id">
                                                 {{ status.name }}
                                             </option>
                                         </select>
-
-                                        <button type="submit" @click="searchStore.onSearch()" class="absolute right-0 bottom-0 outline-0 bg-blue text-gray-800 rounded-r-xl   text-xs px-4 py-3.5 uppercase font-semibold">SEARCH</button>
                                     </div>
                                 </div>
                             </span>
@@ -33,7 +31,9 @@
                                 <tr>
                                     <th scope="col" class="px-5 py-3">Code</th>
                                     <th scope="col" class="px-5 py-3 text-center">Title</th>
+                                    <th scope="col" class="px-5 py-3 text-center">Status</th>
                                     <th scope="col" class="px-5 py-3 mx-2 text-center">Created At</th>
+                                    <th scope="col" class="px-5 py-3 mx-2 text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,9 +41,12 @@
                                     <tr class="bg-white hover:bg-gray-50">
                                         <td class="text-center font-medium text-lg text-zinc-700">{{ item.code }}</td>
                                         <td class="text-center font-medium text-lg text-zinc-700">{{ item.title }}</td>
+                                        <td class="text-center font-medium text-lg text-zinc-700">{{ item.status.name }}</td>
                                         <td class="text-center font-medium text-lg text-zinc-700">{{ item.created_at }}</td>
-                                        <td class="text-center font-medium w-46 text-sm ml-2 text-zinc-70 ">
-
+                                        <td class="text-center font-medium w-46 text-sm ml-2 text-zinc-70">
+                                            <a @click="gotoEditItem(item.id)">
+                                                <img src="https://unpkg.com/lucide-static@latest/icons/pencil.svg" alt="Edit">
+                                            </a>
                                         </td>
                                     </tr>
                                 </template>
@@ -59,6 +62,15 @@
                 </div>
             </div>
         </div>
+
+        <div class="fixed bottom-4 right-4">
+            <a @click="gotoNewItem()" class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-full shadow-lg p-6 transition-colors duration-300 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle">
+                    <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
+                </svg>
+            </a>
+        </div>
+
     </AuthenticatedLayout>
 </template>
 
@@ -66,10 +78,9 @@
 
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import Pagination from '../../../Components/Pagination.vue';
-    import { Head } from '@inertiajs/vue3';
+    import { Head, router } from '@inertiajs/vue3';
     import { useSearchStore } from '../../../States/useSearchStore';
-    import { onMounted } from 'vue';
-    import { computed } from 'vue';
+    import { onMounted , computed } from 'vue';
 
     const props = defineProps({
         params: Object,
@@ -83,6 +94,14 @@
         searchStore.setRoute(route("tasks.dashboard"));
         searchStore.setInitialData(props.results);
     });
+
+    const gotoNewItem = () => {
+        router.visit(route("tasks.form-create"));
+    }
+
+    const gotoEditItem = (taskId) => {
+        router.visit(route("tasks.form-update", { id: taskId }));
+    }
 
     const searchParams = computed(() => searchStore.searchParams);
 

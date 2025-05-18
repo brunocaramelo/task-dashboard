@@ -21,7 +21,9 @@ class TaskRepository implements TaskInterface
 
     private function searchPaginateQuery($filters)
     {
-        return $this->model::when(!empty($filters['title']), function ($query) use ($filters) {
+        return $this->model::with([
+            'status:id,name,slug',
+        ])->when(!empty($filters['title']), function ($query) use ($filters) {
             $query->where('tasks.title', 'LIKE' ,'%'.$filters['title'].'%');
         })
         ->when(!empty($filters['code']), function ($query) use ($filters) {
@@ -32,8 +34,11 @@ class TaskRepository implements TaskInterface
         })
         ->when(!empty($filters['is_cancelled']), function ($query) use ($filters) {
             $query->isCancelled();
-        })
-        ->join('status_tasks', 'status_tasks.id', '=', 'tasks.status_id');
+        })->when((!empty($filters['order_field']) && !empty($filters['order_sense'])), function ($query) use ($filters) {
+            $query->orderBy($filters['order_field'] , $filters['order_sense']);
+        })->when((empty($filters['order_field']) || empty($filters['order_sense'])), function ($query) use ($filters) {
+            $query->orderBy('tasks.created_at' , 'DESC');
+        });
     }
 
 

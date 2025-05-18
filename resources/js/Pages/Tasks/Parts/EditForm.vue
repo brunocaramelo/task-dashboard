@@ -8,60 +8,60 @@
                             id="title"
                             type="text"
                             class="mt-1 block w-full"
-                            v-model="formCreateStore.dataToSend.title"
+                            v-model="formUpdateStore.dataToSend.title"
                             required
                             autofocus
                             autocomplete="title"
                         />
-                        <InputError class="mt-2" :message="formCreateStore.errorsResponse?.title" />
+                        <InputError class="mt-2" :message="formUpdateStore.errorsResponse?.title" />
                     </div>
 
                     <div class="mt-4">
                         <InputLabel for="rapporteur" value="Rapporteur" />
-                        <select v-model="formCreateStore.dataToSend.rapporteur_id" id="rapporteur" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        <select v-model="formUpdateStore.dataToSend.rapporteur_id" id="rapporteur" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <option value="" disabled>Select a user</option>
                             <option v-for="user in dataToFillForm.users" :key="user.id" :value="user.id">
                                 {{ user.name }}
                             </option>
                         </select>
-                        <InputError class="mt-2" :message="formCreateStore.errorsResponse?.rapporteur_id" />
+                        <InputError class="mt-2" :message="formUpdateStore.errorsResponse?.rapporteur_id" />
                     </div>
 
                     <div class="mt-4">
                         <InputLabel for="responsible" value="Responsible" />
-                        <select v-model="formCreateStore.dataToSend.responsible_id" id="responsible" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        <select v-model="formUpdateStore.dataToSend.responsible_id" id="responsible" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <option value="" disabled>Select a user</option>
                             <option v-for="user in dataToFillForm.users" :key="user.id" :value="user.id">
                                 {{ user.name }}
                             </option>
                         </select>
-                        <InputError class="mt-2" :message="formCreateStore.errorsResponse?.responsible_id" />
+                        <InputError class="mt-2" :message="formUpdateStore.errorsResponse?.responsible_id" />
                     </div>
 
                     <div class="mt-4">
                         <InputLabel for="status_id" value="Status" />
-                        <select v-model="formCreateStore.dataToSend.status_id" id="status_id" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        <select v-model="formUpdateStore.dataToSend.status_id" id="status_id" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <option value="" disabled>Select a user</option>
                             <option v-for="user in dataToFillForm.statusList" :key="user.id" :value="user.id">
                                 {{ user.name }}
                             </option>
                         </select>
-                        <InputError class="mt-2" :message="formCreateStore.errorsResponse?.status_id" />
+                        <InputError class="mt-2" :message="formUpdateStore.errorsResponse?.status_id" />
                     </div>
 
                     <div class="mt-4">
                         <InputLabel for="description" value="Description" />
-                        <Textarea v-model="formCreateStore.dataToSend.description" rows="5" cols="30" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 " />
+                        <Textarea v-model="formUpdateStore.dataToSend.description" rows="5" cols="30" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 " />
 
-                        <InputError class="mt-2" :message="formCreateStore.errorsResponse?.description" />
+                        <InputError class="mt-2" :message="formUpdateStore.errorsResponse?.description" />
                     </div>
             </div>
         </div>
         <div class="row">
             <div class="flex items-center justify-end mt-4">
                 <PrimaryButton class="ms-4 border-black"
-                    :disabled="formCreateStore.processing"
-                    @click="formCreateStore.onSubmit()"
+                    :disabled="formUpdateStore.processing"
+                    @click="formUpdateStore.onSubmit()"
                 >
                     Send
                 </PrimaryButton>
@@ -80,28 +80,30 @@
     import InputLabel from '@/Components/InputLabel.vue';
     import PrimaryButton from '@/Components/PrimaryButton.vue';
     import TextInput from '@/Components/TextInput.vue';
-    import { useCreateStoreStore } from '../../../States/useCreateTaskStore';
+    import { useUpdateTaskStore } from '../../../States/useUpdateTaskStore';
     import { useToast } from 'primevue/usetoast';
     import Toast from 'primevue/toast';
 
-    const toast = useToast();
-
-    const formCreateStore = useCreateStoreStore();
-
-    formCreateStore.setRoute(route("tasks.send-create"));
-    formCreateStore.setCsrfToken(document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-
     const props = defineProps({
         dataToFillForm: Object,
+        task: Object
     });
 
-    watch( () => formCreateStore.responseSuccess, (newValue) => {
+    const toast = useToast();
+
+    const formUpdateStore = useUpdateTaskStore();
+
+    formUpdateStore.setRoute(route("tasks.send-update", { id: props.task.id}));
+    formUpdateStore.setInitialData(props.task);
+    formUpdateStore.setCsrfToken(document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+    watch( () => formUpdateStore.responseSuccess, (newValue) => {
             if (newValue && newValue.status == 'success') {
 
                 toast.add({
                     severity: 'success',
-                    summary: 'Task Created',
-                    detail: 'Task ['+newValue.data.code+'] Created!..Redirecting',
+                    summary: 'Task Updated',
+                    detail: 'Task ['+newValue.data.code+'] Updated!..Redirecting',
                     life: 3000
                 });
 
