@@ -24,6 +24,7 @@ class Task extends Model
         'code',
         'rapporteur_id',
         'responsible_id',
+        'author_id',
         'description',
         'status_id',
     ];

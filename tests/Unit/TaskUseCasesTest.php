@@ -54,6 +54,8 @@ it('should call create on the repository with the given data', function () {
              'status_id' => 1,
             ];
 
+    $this->actingAs(\App\Models\User::first());
+
     $result = $this->taskService->create($data);
 
     expect($result->title)->toBe($data['title']);
@@ -83,6 +85,8 @@ it('should call insert comment task on the repository', function () {
             'responsible_id' => 2
             ];
 
+    $this->actingAs(\App\Models\User::first());
+
     $result = $this->commentTaskService->create($data);
 
     expect($result->task_id)->toBe($data['task_id']);
@@ -94,6 +98,8 @@ it('should call update comment task on the repository', function () {
             'task_id' => 1,
             'responsible_id' => 2
             ];
+
+    $this->actingAs(\App\Models\User::first());
 
     $resultInsert = $this->commentTaskService->create($data);
 

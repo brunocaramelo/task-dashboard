@@ -94,7 +94,6 @@
     const searchStore = useSearchStore();
     const searchParams = computed(() => searchStore.searchParams);
     const isToggled = ref(true);
-
     onMounted(() => {
         searchStore.setRoute(route("tasks.dashboard"));
         searchStore.setInitialData(props.results);
@@ -102,10 +101,15 @@
 
     const toggleOrderDate = () => {
       isToggled.value = !isToggled.value;
+
       searchStore.searchParams.order_sense = (isToggled.value ? 'DESC' : 'ASC')
       searchStore.searchParams.order_field = 'tasks.created_at'
 
       searchStore.onSearch();
+    }
+
+    const gotoEditItem = (idTask) => {
+        router.visit(route("tasks.form-update", { id: idTask}));
     }
 
 </script>

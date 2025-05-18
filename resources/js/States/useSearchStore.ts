@@ -8,7 +8,7 @@ export const useSearchStore = defineStore('search', () => {
         title: null,
         code: null,
         order_field: null,
-        order_sense: null,
+        order_sense: 'DESC',
     });
 
     const routeName = ref('');

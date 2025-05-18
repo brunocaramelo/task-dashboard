@@ -51,6 +51,7 @@ class TaskRepository implements TaskInterface
 
     public function create(array $data)
     {
+        $data['author_id'] = \Auth::user()->id;
         $creater = $this->model::create($data);
         $creater->code = 'PBI-'.$creater->id;
         $creater->save();

@@ -18,12 +18,14 @@ return new class extends Migration
             $table->string('code')->nullable()->unique();
             $table->bigInteger('rapporteur_id');
             $table->bigInteger('responsible_id')->nullable();
+            $table->bigInteger('author_id')->nullable();
             $table->bigInteger('status_id');
             $table->longText('description')->nullable();
 
 
             $table->foreign('responsible_id')->references('id')->on('users');
             $table->foreign('rapporteur_id')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
 
             $table->timestamps();
             $table->softDeletes();
