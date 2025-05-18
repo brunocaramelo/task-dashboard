@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Task;
+use App\Models\User;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -26,6 +27,14 @@ class CommentTask extends Model
             'task_id',
             'id'
         );
+    }
+
+    public function responsable()
+    {
+        return $this->belongsTo(User::class,
+                                'responsible_id',
+                                'id',
+                            'responsable');
     }
 
 }

@@ -49,6 +49,14 @@ class Task extends Model
                                 'id'
                             );
     }
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class,
+                                'author_id',
+                                'id',
+                            'author');
+    }
+
     public function rapporteur(): BelongsTo
     {
         return $this->belongsTo(User::class,

@@ -6,6 +6,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import { RealtimeNotification } from '../Components/RealtimeNotification.vue';
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -138,6 +139,8 @@ const showingNavigationDropdown = ref(false);
                     </div>
                 </div>
             </nav>
+
+            <RealtimeNotification />
 
             <!-- Page Heading -->
             <header class="bg-white shadow" v-if="$slots.header">

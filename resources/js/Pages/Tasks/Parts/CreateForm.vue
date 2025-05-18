@@ -100,7 +100,7 @@
 
                 toast.add({
                     severity: 'success',
-                    summary: 'Task Created',
+                    summary: 'You Created a Task',
                     detail: 'Task ['+newValue.data.code+'] Created!..Redirecting',
                     life: 3000
                 });

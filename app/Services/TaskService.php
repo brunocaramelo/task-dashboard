@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Interfaces\TaskInterface;
+
+use App\Events\TaskCreatedSend;
 class TaskService
 {
     private $taskRepository;
@@ -17,11 +19,20 @@ class TaskService
     }
     public function update(array $data, $id)
     {
-        return $this->taskRepository->update($data,$id);
+        $updatedItem = $this->taskRepository->update($data,$id);
+
+        broadcast(new TaskCreatedSend($updatedItem));
+
+        return $updatedItem;
     }
+
     public function create(array $data)
     {
-        return $this->taskRepository->create($data);
+        $createdItem =  $this->taskRepository->create($data);
+
+        broadcast(new TaskCreatedSend($createdItem));
+
+        return $createdItem;
     }
     public function getItem($id)
     {

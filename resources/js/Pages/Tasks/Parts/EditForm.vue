@@ -103,7 +103,7 @@
 
                 toast.add({
                     severity: 'success',
-                    summary: 'Task Updated',
+                    summary: 'You Updated a Task',
                     detail: 'Task ['+newValue.data.code+'] Updated!..Redirecting',
                     life: 3000
                 });
