@@ -21,8 +21,11 @@ class UserRepository implements UserInterface
 
     public function searchGet(array $filters)
     {
-        return $this->searchQuery($filters)
-                ->get();
+        return cache()->tags(['usersList'])
+            ->remember('usersList:'.json_encode($filters), config('cache.default_duration'), function () use ($filters){
+            return $this->searchQuery($filters)
+                    ->get();
+        });
     }
 
 }

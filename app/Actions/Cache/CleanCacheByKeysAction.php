@@ -10,7 +10,9 @@ class CleanCacheByKeysAction extends Action
     public function handle(array $keys)
     {
         foreach ($keys as $key) {
-            cache()->forget($key);
+            $remove = cache()->forget($key);
+            \Log::info('remover chave: '.$key);
+            \Log::info($remove);
         }
 
     }

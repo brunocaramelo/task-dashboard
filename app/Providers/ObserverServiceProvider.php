@@ -4,10 +4,12 @@
 namespace App\Providers;
 
 use App\Models\{Task,
-                CommentTask};
+                CommentTask,
+                User};
 
 use App\Observers\{TaskObserver,
-                  CommentTaskObserver};
+                  CommentTaskObserver,
+                  UserObserver};
 
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +20,7 @@ class ObserverServiceProvider extends ServiceProvider
     {
         Task::observe(TaskObserver::class);
         CommentTask::observe(CommentTaskObserver::class);
+        User::observe(UserObserver::class);
     }
 
     public function register()

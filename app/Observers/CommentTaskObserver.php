@@ -4,8 +4,7 @@ namespace App\Observers;
 
 use App\Models\CommentTask;
 
-use App\Actions\Cache\{CleanCacheByKeysAction,
-    CleanCacheByTagsAction};
+use App\Actions\Cache\CleanCacheByTagAndKeysAction;
 
 class CommentTaskObserver
 {
@@ -14,7 +13,10 @@ class CommentTaskObserver
      */
     public function created(CommentTask $commentTask): void
     {
-        (new CleanCacheByKeysAction())->handle(['taskItem:'.$commentTask->task->id]);
+        (new CleanCacheByTagAndKeysAction())->handle([[
+            'tag' => 'taskItem',
+            'key' => 'taskItem:'.$commentTask->task->id
+        ]]);
     }
 
     /**
@@ -22,7 +24,10 @@ class CommentTaskObserver
      */
     public function updated(CommentTask $commentTask): void
     {
-        (new CleanCacheByKeysAction())->handle(['taskItem:'.$commentTask->task->id]);
+        (new CleanCacheByTagAndKeysAction())->handle([[
+            'tag' => 'taskItem',
+            'key' => 'taskItem:'.$commentTask->task->id
+        ]]);
     }
 
     /**
@@ -30,8 +35,10 @@ class CommentTaskObserver
      */
     public function deleted(CommentTask $commentTask): void
     {
-        (new CleanCacheByKeysAction())->handle(['taskItem:'.$commentTask->task->id]);
-
+        (new CleanCacheByTagAndKeysAction())->handle([[
+            'tag' => 'taskItem',
+            'key' => 'taskItem:'.$commentTask->task->id
+        ]]);
     }
 
 }

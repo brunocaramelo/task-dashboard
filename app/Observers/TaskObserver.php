@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Actions\Cache\{CleanCacheByKeysAction,
+use App\Actions\Cache\{CleanCacheByTagAndKeysAction,
                        CleanCacheByTagsAction};
 
 use App\Models\Task;
@@ -14,7 +14,10 @@ class TaskObserver
      */
     public function created(Task $task): void
     {
-        (new CleanCacheByKeysAction())->handle(['taskItem:'.$task->id]);
+        (new CleanCacheByTagAndKeysAction())->handle([[
+            'tag' => 'taskItem',
+            'key' => 'taskItem:'.$task->id
+        ]]);
         (new CleanCacheByTagsAction())->handle(['tasksList']);
     }
 
@@ -23,8 +26,10 @@ class TaskObserver
      */
     public function updated(Task $task): void
     {
-        \Log::info('interceptei updated');
-        (new CleanCacheByKeysAction())->handle(['taskItem:'.$task->id]);
+        (new CleanCacheByTagAndKeysAction())->handle([[
+            'tag' => 'taskItem',
+            'key' => 'taskItem:'.$task->id
+        ]]);
         (new CleanCacheByTagsAction())->handle(['tasksList']);
     }
 
@@ -33,7 +38,10 @@ class TaskObserver
      */
     public function deleted(Task $task): void
     {
-        (new CleanCacheByKeysAction())->handle(['taskItem:'.$task->id]);
+        (new CleanCacheByTagAndKeysAction())->handle([[
+            'tag' => 'taskItem',
+            'key' => 'taskItem:'.$task->id
+        ]]);
         (new CleanCacheByTagsAction())->handle(['tasksList']);
     }
 

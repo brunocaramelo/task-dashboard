@@ -1,5 +1,6 @@
 <template>
             <div class="row">
+                <h1>Task: {{ task.code }}</h1>
                 <div class="grid grid-cols-4 gap-4">
                     <div>
                         <InputLabel for="title" value="Title" />
