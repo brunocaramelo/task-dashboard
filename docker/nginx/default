@@ -1,6 +1,6 @@
 # Example configuration:
 upstream fastcgi_backend {
-    server   php:9000;
+    server   php:9001;
 }
 
 server {

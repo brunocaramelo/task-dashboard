@@ -2,24 +2,25 @@ version: '3.8'
 
 services:
   database:
-    image: postgres:latest
-    container_name: postgres-wms
+    image: postgres:15
+    container_name: postgres-tasker-app
     volumes:
       - postgres-data:/var/lib/postgresql/data:rw
     ports:
-      - "5432:5432"
+      - "5433:5432"
     env_file:
       - docker/docker-compose-env/database.env
   php:
     build:
       context: .
       dockerfile: ./docker/php8-fpm/Dockerfile
-    image: taskerapitest-app:v4.0
+    image: tasker-api-test-app:v1.0
     container_name: php-tasker
     restart: on-failure
     ports:
-      - "9000:9000"
+      - "9001:9000"
     depends_on:
+      - websocket-server
       - database
     command: bash -c "php artisan migrate && php-fpm"
     env_file:
@@ -29,6 +30,18 @@ services:
     volumes:
      - .:/app:rw
 
+  websocket-server:
+    build:
+      context: .
+      dockerfile: ./docker/php8-fpm/Dockerfile
+    image: tasker-websocket-app:v1.0
+    container_name: tasker-websocket-app
+    command: sh -c "php /app/artisan artisan reverb:start --port=8182"
+    restart: on-failure
+    env_file:
+      - docker/docker-compose-env/application.env
+    volumes:
+      - .:/app:rw
   cache:
     image: redis:alpine
     container_name: redis-tasker
@@ -36,13 +49,19 @@ services:
     volumes:
       - redis-data:/data
     ports:
-    - "6380:6380"
+    - "6381:6380"
   web:
-    image: nginx:1.19.10-alpine
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    image: tasker-frontend-test-app:v1.0
     container_name: nginx-tasker
     restart: on-failure
+    env_file:
+      - docker/docker-compose-env/application.env
     depends_on:
       - php
+      - websocket-server
     volumes_from:
       - php
     volumes:
