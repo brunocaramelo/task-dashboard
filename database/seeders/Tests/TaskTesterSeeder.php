@@ -20,6 +20,7 @@ class TaskTesterSeeder extends Seeder
             'rapporteur_id' => 2,
             'responsible_id' => 3,
             'status_id' => 1,
+            'author_id' => 1,
         ]);
     }
 }

@@ -14,11 +14,8 @@ class TaskUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'rapporteur_id' => ['required'],
-            'responsible_id' => ['required'],
-            'status_id' => ['required'],
-            'description' => ['required', 'string'],
+            'title' => ['string', 'max:255'],
+            'description' => [ 'string'],
         ];
     }
 

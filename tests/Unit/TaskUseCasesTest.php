@@ -1,27 +1,23 @@
 <?php
 
 use App\Services\{TaskService,
-                CommentTaskService
+                 UsersService
                 };
 
 use App\Repositories\{TaskRepository,
-                      CommentTaskRepository
+                      UserRepository
                     };
 
-use Database\Seeders\Tests\{TaskTesterSeeder,
-                            StatusTaskTesterSeeder,
-                            UserTesterSeeder
-                            };
-
+use Database\Seeders\DatabaseTestSeeder;
 
 beforeEach(function () {
 
-    runSeeder(StatusTaskTesterSeeder::class);
-    runSeeder(UserTesterSeeder::class);
-    runSeeder(TaskTesterSeeder::class);
+    runSeeder(DatabaseTestSeeder::class);
+
+    $this->actingAs(\App\Models\User::first());
 
     $this->taskService = new TaskService(new TaskRepository());
-    $this->commentTaskService = new CommentTaskService(new CommentTaskRepository());
+    $this->userService = new UsersService(new UserRepository());
 
 });
 
@@ -54,8 +50,6 @@ it('should call create on the repository with the given data', function () {
              'status_id' => 1,
             ];
 
-    $this->actingAs(\App\Models\User::first());
-
     $result = $this->taskService->create($data);
 
     expect($result->title)->toBe($data['title']);
@@ -71,41 +65,17 @@ it('should call getItem on the repository with the given id', function () {
 });
 
 it('should call getStatusList on the repository', function () {
-    $statusList = ['pending'];
+    $statusList = ['pending', 'completed', 'blocked'];
 
     $result = $this->taskService->getStatusList()->pluck('slug')->toArray();
 
     expect($result)->toBe($statusList);
 });
+it('should call getListUsers on the userService', function () {
+    $email = 'coworker@test.com';
 
-it('should call insert comment task on the repository', function () {
-    $data = [
-            'message' => 'Comentando',
-            'task_id' => 1,
-            'responsible_id' => 2
-            ];
+    $result = $this->userService->searchGet([]);
 
-    $this->actingAs(\App\Models\User::first());
-
-    $result = $this->commentTaskService->create($data);
-
-    expect($result->task_id)->toBe($data['task_id']);
+    expect($result[1]->email)->toBe($email);
 });
 
-it('should call update comment task on the repository', function () {
-    $data = [
-            'message' => 'Comentando',
-            'task_id' => 1,
-            'responsible_id' => 2
-            ];
-
-    $this->actingAs(\App\Models\User::first());
-
-    $resultInsert = $this->commentTaskService->create($data);
-
-    $data['message'] = 'Mudei';
-
-    $result = $this->commentTaskService->update($data ,$resultInsert->id);
-
-    expect($result->message)->toBe($data['message']);
-});

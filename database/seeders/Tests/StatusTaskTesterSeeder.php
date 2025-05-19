@@ -18,5 +18,15 @@ class StatusTaskTesterSeeder extends Seeder
             'name' => 'Pending',
             'slug' => 'pending',
         ]);
+
+        \App\Models\StatusTask::create([
+            'name' => 'Completed',
+            'slug' => 'completed',
+        ]);
+
+        \App\Models\StatusTask::create([
+            'name' => 'Blocked',
+            'slug' => 'blocked',
+        ]);
     }
 }

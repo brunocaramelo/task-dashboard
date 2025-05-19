@@ -72,7 +72,7 @@ class TaskBoardController extends Controller
             'status' => 'success',
             'message' => 'Updated with success',
             'data' => $response,
-            ], 201);
+            ], 200);
     }
 
 
