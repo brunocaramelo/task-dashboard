@@ -4,7 +4,13 @@ namespace App\Services;
 
 use App\Interfaces\TaskInterface;
 
-use App\Events\TaskCreatedSend;
+use App\Resources\{TaskResource,
+                  TaskResourcePaginate,
+                  StatusTaskResource,
+                  StatusTaskSimpleCollection};
+
+use App\Events\{TaskCreatedSend,
+                TaskUpdatedSend};
 class TaskService
 {
     private $taskRepository;
@@ -15,20 +21,20 @@ class TaskService
     }
     public function searchPaginate(array $filters)
     {
-        return $this->taskRepository->searchPaginate($filters);
+        return new TaskResourcePaginate($this->taskRepository->searchPaginate($filters));
     }
     public function update(array $data, $id)
     {
-        $updatedItem = $this->taskRepository->update($data,$id);
+        $updatedItem = new TaskResource($this->taskRepository->update($data,$id));
 
-        broadcast(new TaskCreatedSend($updatedItem));
+        broadcast(new TaskUpdatedSend($updatedItem))->toOthers();
 
         return $updatedItem;
     }
 
     public function create(array $data)
     {
-        $createdItem =  $this->taskRepository->create($data);
+        $createdItem =  new TaskResource($this->taskRepository->create($data));
 
         broadcast(new TaskCreatedSend($createdItem));
 
@@ -36,18 +42,18 @@ class TaskService
     }
     public function getItem($id)
     {
-        return $this->taskRepository->getItem($id);
+        return new TaskResource($this->taskRepository->getItem($id));
     }
     public function getStatusList()
     {
-        return $this->taskRepository->getStatusList();
+        return new StatusTaskSimpleCollection($this->taskRepository->getStatusList());
     }
     public function getStatusWithAllItemList()
     {
         $falseItem = new \App\Models\StatusTask();
         $falseItem->name = 'All';
 
-        $list = $this->taskRepository->getStatusList()->push($falseItem);
+        $list = new StatusTaskSimpleCollection($this->taskRepository->getStatusList()->push($falseItem));
 
         return $list;
     }

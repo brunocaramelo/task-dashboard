@@ -29,6 +29,7 @@ class TaskBoardController extends Controller
 
     public function search(Request $filter)
     {
+
         return Inertia::render('Tasks/Dashboard/Index', [
             'results' => $this->taskService->searchPaginate($filter->all()),
             'statusList' => $this->taskService->getStatusWithAllItemList(),

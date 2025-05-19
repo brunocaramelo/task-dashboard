@@ -83,8 +83,7 @@ class TaskRepository implements TaskInterface
     {
         return cache()->tags(['statusTask'])
                 ->remember('statusTask' ,config('cache.default_duration'), function (){
-                    return StatusTask::select(['id', 'name', 'slug'])
-                                    ->get();
+                    return StatusTask::get();
         });
     }
 }

@@ -16,7 +16,7 @@
                                         <input type="text" v-model="searchStore.searchParams.title" @blur="searchStore.onSearch()"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Title...">
                                         <select v-model="searchStore.searchParams.status" @change="searchStore.onSearch()" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                             <option value="" disabled>Select a status</option>
-                                            <option v-for="status in statusList" :key="status.id" :value="status.id">
+                                            <option v-for="status in statusList.data" :key="status.id" :value="status.id">
                                                 {{ status.name }}
                                             </option>
                                         </select>
@@ -55,10 +55,10 @@
                                 </template>
                             </tbody>
                         </table>
+
                         <div class="border-t mb-3 pt-3" v-if="results && results.data.length > 0">
                             <Pagination
-                                :data="results"
-                                :params="params"
+                                :data="results.meta"
                                 class="mt-5 text-right">
                             </Pagination>
                         </div>
@@ -96,7 +96,7 @@
     const isToggled = ref(true);
     onMounted(() => {
         searchStore.setRoute(route("tasks.dashboard"));
-        searchStore.setInitialData(props.results);
+        searchStore.setInitialData(props.results.data);
     });
 
     const toggleOrderDate = () => {
@@ -110,6 +110,10 @@
 
     const gotoEditItem = (idTask) => {
         router.visit(route("tasks.form-update", { id: idTask}));
+    }
+
+    const gotoNewItem = () => {
+        router.visit(route("tasks.form-create"));
     }
 
 </script>

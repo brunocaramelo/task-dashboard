@@ -5,7 +5,7 @@
               <div class="flex mt-1 text-gray-500 font-semibold pt-0.5 mr-5">
                   <p class="mr-2 ">Total per page {{ data.per_page }} </p>
                   <p>{{ data.current_page }}</p> -
-                  <p class="mr-2">{{ data.last_page }}</p> de
+                  <p class="mr-2">{{ data.last_page }}</p> of
                   <p class="ml-2">{{ data.total }}</p>
               </div>
           <li class="page-item">

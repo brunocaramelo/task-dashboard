@@ -9,12 +9,13 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class CommentTaskUpdatedSend
+class CommentTaskUpdatedSend implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $message;
+    public $message;
     public function __construct($commentTask)
     {
         $currentUser = $commentTask->responsable;

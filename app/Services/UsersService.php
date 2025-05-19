@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Interfaces\UserInterface;
 
+use App\Resources\UserSimpleCollection;
+
 class UsersService
 {
     private $userRepository;
@@ -15,6 +17,6 @@ class UsersService
 
     public function searchGet(array $data)
     {
-        return $this->userRepository->searchGet($data);
+        return new UserSimpleCollection($this->userRepository->searchGet($data));
     }
 }

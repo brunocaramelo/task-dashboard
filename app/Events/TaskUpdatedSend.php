@@ -9,12 +9,14 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class TaskUpdatedSend
+
+class TaskUpdatedSend implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $message;
+    public $message;
 
     public function __construct($task)
     {
