@@ -96,7 +96,7 @@
 
     formUpdateStore.setRoute(route("tasks.send-update", { id: props.task.data.id}));
     formUpdateStore.setInitialData(props.task.data);
-    formUpdateStore.setCsrfToken(document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+    formUpdateStore.setCsrfToken(document.querySelector(props.csrfToken);
 
     watch( () => formUpdateStore.responseSuccess, (newValue) => {
             if (newValue && newValue.status == 'success') {

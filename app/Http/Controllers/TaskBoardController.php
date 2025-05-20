@@ -42,6 +42,7 @@ class TaskBoardController extends Controller
         return Inertia::render('Tasks/New', [
             'users' => $this->usersService->searchGet([]),
             'statusList' => $this->taskService->getStatusList(),
+            'csrfToken' => csrf_token(),
         ]);
     }
 
@@ -61,6 +62,7 @@ class TaskBoardController extends Controller
             'users' => $this->usersService->searchGet([]),
             'statusList' => $this->taskService->getStatusList(),
             'task' => $this->taskService->getItem($id),
+            'csrfToken' => csrf_token(),
         ]);
     }
 

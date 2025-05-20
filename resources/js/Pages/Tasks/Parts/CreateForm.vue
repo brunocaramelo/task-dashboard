@@ -89,7 +89,7 @@
     const formCreateStore = useCreateStoreStore();
 
     formCreateStore.setRoute(route("tasks.send-create"));
-    formCreateStore.setCsrfToken(document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+    formCreateStore.setCsrfToken(props.csrfToken);
 
     const props = defineProps({
         dataToFillForm: Object,

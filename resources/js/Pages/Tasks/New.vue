@@ -5,7 +5,8 @@
 
     const dataToFillForm = defineProps({
         users: Array,
-        statusList: Array
+        statusList: Array,
+        csrfToken: String
     });
 
 </script>

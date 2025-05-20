@@ -13,7 +13,7 @@ services:
   websocket-server:
     build:
       context: .
-      dockerfile: ./docker/php8-fpm/Dockerfile
+      dockerfile: ./docker/php-cli/Dockerfile
     image: tasker-websocket-app:v1.0
     container_name: websocket-tasker
     # restart: on-failure
