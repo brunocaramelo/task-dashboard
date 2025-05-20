@@ -36,6 +36,11 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=builder /app /app
 
+COPY \
+  --from=build-frontend \
+  --chown=www-data:www-data \
+  /app/public /app/public
+
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
 WORKDIR /app

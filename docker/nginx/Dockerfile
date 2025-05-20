@@ -13,7 +13,7 @@ RUN npm run build
 
 FROM nginx:1.19.10-alpine
 
-COPY --from=build-frontend /app/public /app/public
+COPY --from=build-frontend /app /app
 
 RUN rm -rf /etc/nginx/conf.d/default.conf
 
