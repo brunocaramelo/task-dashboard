@@ -1,66 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SIMPLE PRIORITY QUERY APPLICATION
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c394a0b9d883422d82a1dc2d8e9394b1)](https://app.codacy.com/gh/brunocaramelo/wms_strategy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-## About Laravel
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/c394a0b9d883422d82a1dc2d8e9394b1)](https://app.codacy.com/gh/brunocaramelo/wms_strategy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technical Specifications
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This application has the following specifications: 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Tool | Version |
+| --- | --- |
+| Docker | 28.1.1, |
+| Docker Compose | 2.32.4 |
+| Nginx | 1.28.0 |
+| PHP | 8.3.9 |
+| Postgre | 15.3 |
+| Sqlite (Unit Tests) | 3.46.1 |
+| Laravel Framework | 10.10 |
+| Vue 3 | 3.4.0 |
+| Prime Vue  | 3.53.1 |
+| Tailwindcss  | 3.2.1 |
 
-## Learning Laravel
+The application is separated into the following containers
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Service | Image | Motivation
+| --- | --- | --- |
+| postgres | postgres:15 | Main database |
+| php | php-app | Main Application (Web) |
+| php | php-cli | CLI Application running Reverb Websocket |
+| web (nginx) and Vue 3 | nginx:alpine | Web Server |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Requirements
+    - Docker
+    - Docker Daemon (Service)
+    - Docker Compose
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation procedures
+    Procedures for installing the application for local use
 
-## Laravel Sponsors
+1- Download repository 
+    - git clone https://github.com/brunocaramelo/task-dashboard.git
+       
+        we must copy .env.docker-compose to .env with the command below:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+        - cp docker/docker-compose-env/application.env.example docker/docker-compose-env/application.env
+        - cp docker/docker-compose-env/database.env.example docker/docker-compose-env/database.env
 
-### Premium Partners
+2 - Check that the ports:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    - 443 (nginx) 
+    
+    - 9000(php-fpm)
 
-## Contributing
+    - 5432(postgres) 
+    
+    - 8182(websocket) 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+     are busy.
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3 - Enter the application's home directory and run the following commands:
+    
+    1 - docker-compose up -d;
 
-## Security Vulnerabilities
+    ### Description of steps (in case of problems)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    1 - for the images to be stored and executed and upload the instances
+        
+        (NOTE) - due to composer's delay in bringing up the dependencies, there are 3 alternatives,
+        
+            1 - RUN sudo docker-compose up; without being a daemon the first time, so that you can check the progress of the installation of dependencies.
+            
+            2 - Wait 20 minutes or so for the command to be executed, to avoid autoloading for example.
+            
+            
+    2 - for the framework to generate and apply the mapping for the database (SQL), which can be PostGres or SQLITE.
+    
+    3 - for the framework to apply changes to the database data, in the case of inserting a first user.
+    
+    4 - generation of a hash key for use by the system as a validation key.
+    
+    5 - for the framework to run the test suite.
+        - API tests  
+        - Unit tests
+     
 
-## License
+## Post Installation
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+After installation, the access address is:
+
+- https://localhost/login
+
+### Users Access
+| Email | Name | Password
+| --- | --- | --- |
+| admin@test.com | Admin | password |
+| coworker@test.com | Coworker | password |
+| coworker@test.com | Coworker | password |
+| stakeholder@test.com | Stakeholder | password |
+
+## Tecnical Details
+
+    - Laravel 10
+
+    - Postgre 15
+
+    - Redis (Cache and Websocket)
+
+    - Reverb (Websocket)
+
+    - SOLID
+
+    - Unit Tests
+
+    - Docker and docker-compose
