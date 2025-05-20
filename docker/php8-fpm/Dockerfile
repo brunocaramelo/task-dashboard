@@ -12,6 +12,18 @@ RUN composer install  \
 
 RUN composer dump-autoload --optimize --classmap-authoritative
 
+
+FROM node:22 as build-frontend
+
+WORKDIR /app
+
+COPY ./package.json ./package-lock.json /app/
+RUN npm install
+
+COPY . /app
+RUN npm run build
+
+
 FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \

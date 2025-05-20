@@ -10,7 +10,7 @@ class Action
         try {
             return app(static::class)->handle(...$arguments);
         } catch (\Exception $e) {
-            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+            throw new \Exception($e->getMessage(), $e->getCode());
         }
     }
 }
