@@ -10,7 +10,7 @@ This application has the following specifications:
 
 | Tool | Version |
 | --- | --- |
-| Docker | 28.1.1, |
+| Docker | 28.1.1 |
 | Docker Compose | 2.32.4 |
 | Nginx | 1.28.0 |
 | PHP | 8.3.9 |
@@ -96,7 +96,6 @@ After installation, the access address is:
 | --- | --- | --- |
 | admin@test.com | Admin | password |
 | coworker@test.com | Coworker | password |
-| coworker@test.com | Coworker | password |
 | stakeholder@test.com | Stakeholder | password |
 
 ## Tecnical Details
@@ -104,6 +103,8 @@ After installation, the access address is:
     - Laravel 10
 
     - Postgre 15
+
+    - Vue 3
 
     - Redis (Cache and Websocket)
 
