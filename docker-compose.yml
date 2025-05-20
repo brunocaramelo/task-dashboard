@@ -5,58 +5,44 @@ services:
     image: postgres:15
     container_name: postgres-tasker-app
     volumes:
-      - postgres-data:/var/lib/postgresql/data:rw
+      - ~/.docker/postgres15-data:/var/lib/postgresql/data:rw
     ports:
-      - "5433:5432"
+      - "5432:5432"
     env_file:
       - docker/docker-compose-env/database.env
-  php:
-    build:
-      context: .
-      dockerfile: ./docker/php8-fpm/Dockerfile
-    image: tasker-api-test-app:v1.0
-    container_name: php-tasker
-    restart: on-failure
-    ports:
-      - "9001:9000"
-    depends_on:
-      - websocket-server
-      - database
-    command: bash -c "php artisan migrate && php-fpm"
-    env_file:
-      - docker/docker-compose-env/application.env
-    links:
-      - database
-    volumes:
-     - .:/app:rw
-
   websocket-server:
     build:
       context: .
       dockerfile: ./docker/php8-fpm/Dockerfile
     image: tasker-websocket-app:v1.0
-    container_name: tasker-websocket-app
-    command: sh -c "php /app/artisan artisan reverb:start --port=8182"
-    restart: on-failure
+    container_name: websocket-tasker
+    # restart: on-failure
+    ports:
+      - "8182:8182"
+    command: bash -c "php /app/artisan reverb:start --port=8182"
     env_file:
-      - docker/docker-compose-env/application.env
+      - docker/docker-compose-env/ws-application.env
     volumes:
-      - .:/app:rw
+      - ./:/app:rw
+    links:
+      - cache
   cache:
     image: redis:alpine
     container_name: redis-tasker
     command: ['redis-server', '--bind','0.0.0.0','--requirepass', 'testes','--port','6380']
     volumes:
-      - redis-data:/data
+      - ~/.docker/redis-data-latest:/data
     ports:
-    - "6381:6380"
+    - "6380:6380"
+
+
   web:
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
     image: tasker-frontend-test-app:v1.0
     container_name: nginx-tasker
-    restart: on-failure
+    # restart: on-failure
     env_file:
       - docker/docker-compose-env/application.env
     depends_on:
@@ -69,9 +55,24 @@ services:
       - ./docker/nginx/certs:/etc/nginx/certs
     ports:
       - 443:443
-
-volumes:
-  postgres-data:
-    driver: "local"
-  redis-data:
-    driver: "local"
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php8-fpm/Dockerfile
+    image: task-app-container:v4.0
+    container_name: task-app-container
+    # restart: on-failure
+    ports:
+      - "9000:9000"
+    depends_on:
+      - cache
+      - database
+    command: bash -c "php artisan migrate && php-fpm"
+    env_file:
+      - docker/docker-compose-env/application.env
+    links:
+      - database
+      - cache
+      - websocket-server
+    volumes:
+     - ./:/app:rw
