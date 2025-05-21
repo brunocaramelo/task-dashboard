@@ -14,14 +14,28 @@ class TaskAppSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Task::create([
-            'title' => 'Task 1 Seeded',
-            'code' => 'PBI-1',
-            'description' => 'Description about this test',
-            'rapporteur_id' => 2,
-            'responsible_id' => 3,
-            'status_id' => 1,
-            'author_id' => 1,
-        ]);
+
+        $users = [
+            [
+                'title' => 'Task 1 Seeded',
+                'code' => 'PBI-1',
+                'description' => 'Description about this test',
+                'rapporteur_id' => 2,
+                'responsible_id' => 3,
+                'status_id' => 1,
+                'author_id' => 1,
+            ]
+        ];
+
+        foreach ($users as $userData) {
+
+            if(\App\Models\Task::where('code', $userData['code'])->exists()) {
+                continue;
+            }
+
+            \App\Models\Task::create(
+                $userData
+            );
+        }
     }
 }

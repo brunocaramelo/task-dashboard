@@ -14,23 +14,34 @@ class UserAppSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::create([
-            'name' => 'Admin',
-            'email' => 'admin@test.com',
-            'password' => Hash::make('password'),
-        ]);
+        $users = [
+            [
+                'name' => 'Admin',
+                'email' => 'admin@test.com',
+                'password' => Hash::make('password')
+            ],
+            [
+                'name' => 'Coworker',
+                'email' => 'coworker@test.com',
+                'password' => Hash::make('password')
+            ],
+            [
+                'name' => 'Stakeholder',
+                'email' => 'stakeholder@test.com',
+                'password' => Hash::make('password')
+            ]
+        ];
 
-        \App\Models\User::create([
-            'name' => 'Coworker',
-            'email' => 'coworker@test.com',
-            'password' => Hash::make('password'),
-        ]);
+        foreach ($users as $userData) {
 
-        \App\Models\User::create([
-            'name' => 'Stakeholder',
-            'email' => 'stakeholder@test.com',
-            'password' => Hash::make('password'),
-        ]);
+            if(\App\Models\User::where('email', $userData['email'])->exists()) {
+                continue;
+            }
+
+            \App\Models\User::create(
+                $userData
+            );
+        }
 
     }
 }

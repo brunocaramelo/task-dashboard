@@ -14,19 +14,32 @@ class StatusTaskAppSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\StatusTask::create([
-            'name' => 'Pending',
-            'slug' => 'pending',
-        ]);
+        $users = [
+            [
+                'name' => 'Pending',
+                'slug' => 'pending',
+            ],
+            [
+                'name' => 'Completed',
+                'slug' => 'completed',
+            ],
+            [
+                'name' => 'Blocked',
+                'slug' => 'blocked',
+            ]
+        ];
 
-        \App\Models\StatusTask::create([
-            'name' => 'Completed',
-            'slug' => 'completed',
-        ]);
+        foreach ($users as $userData) {
+            if(\App\Models\StatusTask::where('slug', $userData['slug'])->exists()) {
+                continue;
+            }
 
-        \App\Models\StatusTask::create([
-            'name' => 'Blocked',
-            'slug' => 'blocked',
-        ]);
+            \App\Models\StatusTask::create(
+                $userData
+            );
+
+        }
+
+
     }
 }

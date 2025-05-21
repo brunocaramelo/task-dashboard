@@ -2,6 +2,8 @@ FROM composer:2.7.7 as builder
 
 COPY . /app
 
+WORKDIR /app
+
 RUN composer install  \
     --ignore-platform-reqs \
     --no-ansi \
@@ -10,7 +12,7 @@ RUN composer install  \
     --no-scripts \
     --prefer-dist
 
-COPY /app/docker/startup/startup-app.sh /app/startup-app.sh
+COPY docker/startup/startup-app.sh startup-app.sh
 
 RUN composer dump-autoload --optimize --classmap-authoritative
 
@@ -67,5 +69,7 @@ RUN sed -i "s/pm.max_spare_servers = 3/pm.max_spare_servers = 15/" /usr/local/et
 RUN sed -i "s/;pm.max_requests = 500/pm.max_requests = 500/" /usr/local/etc/php-fpm.d/www.conf
 
 RUN chown -R www-data:www-data /app
+
+RUN chmod +x startup-app.sh
 
 CMD ["php-fpm"]
