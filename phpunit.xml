@@ -29,5 +29,30 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="BROADCAST_DRIVER" value="null"/>
+        <env name="XDEBUG_MODE" value="coverage"/>
     </php>
+    <coverage>
+        <include>
+            <directory suffix=".php">app</directory>
+        </include>
+        <exclude>
+            <directory>app/Exceptions</directory>
+            <directory>app/Providers</directory>
+            <directory>app/Http/Controllers/Auth</directory>
+            <directory>app/Http/Kernel</directory>
+            <directory>app/Actions/Cache</directory>
+            <directory>app/Http/Middleware</directory>
+            <directory>app/Observers/CommentTaskObserver</directory>
+            <directory>app/Listeners</directory>
+            <directory>app/Events</directory>
+            <directory>app/Actions</directory>
+            <file>app/Models/CommentTask.php</file>
+            <file>app/Repositories/CommentTaskRepository.php</file>
+            <file>app/Observers/CommentTaskObserver.php</file>
+            <file>app/Models/User.php</file>
+        </exclude>
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+        </report>
+    </coverage>
 </phpunit>
