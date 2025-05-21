@@ -57,6 +57,8 @@ The application is separated into the following containers
 
     - 443 (nginx) 
     
+    - 6380 (redis) 
+    
     - 9000(php-fpm)
 
     - 5432(postgres) 
