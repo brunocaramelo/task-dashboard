@@ -18,6 +18,8 @@ This application has the following specifications:
 | Postgre | 15.3 |
 | Sqlite (Unit Tests) | 3.46.1 |
 | Laravel Framework | 10.10 |
+| Laravel Reverb | 1.5 |
+| Laravel Echo | 2.1.4 |
 | Vue 3 | 3.4.0 |
 | Prime Vue  | 3.53.1 |
 | Tailwindcss  | 3.2.1 |
@@ -108,6 +110,8 @@ After installation, the access address is:
     - Vue 3
 
     - Redis (Cache and Websocket)
+
+    - Laravel Echo
 
     - Reverb (Websocket)
 
