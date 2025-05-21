@@ -86,15 +86,15 @@
 
     const toast = useToast();
 
-    const formCreateStore = useCreateStoreStore();
-
-    formCreateStore.setRoute(route("tasks.send-create"));
-    formCreateStore.setCsrfToken(props.csrfToken);
-
     const props = defineProps({
         dataToFillForm: Object,
         csrfToken: String
     });
+
+    const formCreateStore = useCreateStoreStore();
+
+    formCreateStore.setRoute(route("tasks.send-create"));
+    formCreateStore.setCsrfToken(props.csrfToken);
 
     watch( () => formCreateStore.responseSuccess, (newValue) => {
             if (newValue && newValue.status == 'success') {
