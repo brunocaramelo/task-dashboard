@@ -93,6 +93,7 @@
 
     const props = defineProps({
         dataToFillForm: Object,
+        csrfToken: String
     });
 
     watch( () => formCreateStore.responseSuccess, (newValue) => {

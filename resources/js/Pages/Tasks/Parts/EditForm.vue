@@ -87,7 +87,8 @@
 
     const props = defineProps({
         dataToFillForm: Object,
-        task: Object
+        task: Object,
+        csrfToken: String
     });
 
     const toast = useToast();
