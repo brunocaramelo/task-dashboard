@@ -46,7 +46,7 @@ The application is separated into the following containers
 1- Download repository 
     - git clone https://github.com/brunocaramelo/task-dashboard.git
        
-        we must copy .env.docker-compose.example to .env with the command below:
+        we must copy env files with commands below:
 
         - cp .env.docker-compose.example .env
         - cp docker/docker-compose-env/application.env.example docker/docker-compose-env/application.env
@@ -98,8 +98,8 @@ After installation, the access address is:
 
 - https://localhost/login
 
-### Users Access
-| Email | Name | Password
+### Users Credentials
+| E-mail | Name | Password
 | --- | --- | --- |
 | admin@test.com | Admin | password |
 | coworker@test.com | Coworker | password |
@@ -115,7 +115,7 @@ After installation, the access address is:
 
     - Redis (Cache and Websocket)
 
-    - Laravel Echo
+    - Laravel Echo (Broadcast Client)
 
     - Reverb (Websocket)
 
