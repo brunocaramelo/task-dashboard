@@ -37,32 +37,32 @@ export const RealtimeNotification = {
                 console.error('task.updated Subscription error:', err);
             });
 
-            window.Echo.channel('comment-task-channel')
-            .listen('.comment-task.created', (e) => {
-                toast.add({
-                    severity: 'info',
-                    summary: 'Broadcast - Comment Task Created',
-                    detail: e.message,
-                    life: 3000
-                });
+            // window.Echo.channel('comment-task-channel')
+            // .listen('.comment-task.created', (e) => {
+            //     toast.add({
+            //         severity: 'info',
+            //         summary: 'Broadcast - Comment Task Created',
+            //         detail: e.message,
+            //         life: 3000
+            //     });
 
-            }).error((err) => {
-                console.error('Subscription error:', err);
-            });
+            // }).error((err) => {
+            //     console.error('Subscription error:', err);
+            // });
 
-            window.Echo.channel('comment-task-channel')
-            .listen('.comment-task.updated', (e) => {
+            // window.Echo.channel('comment-task-channel')
+            // .listen('.comment-task.updated', (e) => {
 
-                toast.add({
-                    severity: 'info',
-                    summary: 'Broadcast - Comment Task Updated',
-                    detail: e.message,
-                    life: 3000
-                });
+            //     toast.add({
+            //         severity: 'info',
+            //         summary: 'Broadcast - Comment Task Updated',
+            //         detail: e.message,
+            //         life: 3000
+            //     });
 
-            }).error((err) => {
-                console.error('task.updated Subscription error:', err);
-            });
+            // }).error((err) => {
+            //     console.error('task.updated Subscription error:', err);
+            // });
 
 
     },
