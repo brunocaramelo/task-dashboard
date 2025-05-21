@@ -67,7 +67,11 @@ export const RealtimeNotification = {
 
     },
     beforeDestroy() {
-        window.Echo.disconnect();
+        setTimeout(() => {
+            if (window.Echo) {
+                window.Echo.disconnect();
+            }
+        }, 100);
     }
 }
 
