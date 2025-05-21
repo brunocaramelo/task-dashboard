@@ -24,7 +24,7 @@ class TaskUpdatedSend implements ShouldBroadcastNow
 
         $message = <<<EOT
         Task [$task->code] has updated
-        by $currentUser->name
+        by $currentUser?->name
         EOT;
 
         $this->message = $message;

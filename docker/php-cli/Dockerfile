@@ -12,17 +12,6 @@ RUN composer install  \
 
 RUN composer dump-autoload --optimize --classmap-authoritative
 
-
-FROM node:22 as build-frontend
-
-WORKDIR /app
-
-COPY ./package.json ./package-lock.json /app/
-RUN npm install
-
-COPY . /app
-RUN npm run build
-
 FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -33,6 +22,13 @@ RUN apt-get update && apt-get install -y \
       libpq-dev \
       libmcrypt-dev \
       libzip-dev \
+      git \
+      curl \
+      libpng-dev \
+      libonig-dev \
+      libxml2-dev \
+      unzip \
+      libevent-dev \
     && rm -r /var/lib/apt/lists/* \
     && docker-php-ext-install exif \
     && docker-php-ext-install pdo pdo pdo_pgsql \
@@ -43,14 +39,13 @@ RUN apt-get update && apt-get install -y \
       pdo_sqlite \
       pgsql \
       zip \
+      sockets \
       opcache
 
 COPY --from=builder /app /app
 
-COPY \
-  --from=build-frontend \
-  --chown=www-data:www-data \
-  /app/public /app/public
+RUN pecl install pcov && docker-php-ext-enable pcov
+
 
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
