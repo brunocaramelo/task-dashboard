@@ -1,5 +1,7 @@
 # SIMPLE PRIORITY QUERY APPLICATION
 
+Quality Certification Seals
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3933d4c448a84e329a26085c5d59ff47)](https://app.codacy.com/gh/brunocaramelo/task-dashboard/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/3933d4c448a84e329a26085c5d59ff47)](https://app.codacy.com/gh/brunocaramelo/task-dashboard/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
