@@ -46,9 +46,11 @@ The application is separated into the following containers
 1- Download repository 
     - git clone https://github.com/brunocaramelo/task-dashboard.git
        
-        we must copy .env.docker-compose to .env with the command below:
+        we must copy .env.docker-compose.example to .env with the command below:
 
+        - cp .env.docker-compose.example .env
         - cp docker/docker-compose-env/application.env.example docker/docker-compose-env/application.env
+        - cp docker/docker-compose-env/ws-application.env.example docker/docker-compose-env/ws-application.env
         - cp docker/docker-compose-env/database.env.example docker/docker-compose-env/database.env
 
 2 - Check that the ports:

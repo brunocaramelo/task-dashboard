@@ -23,7 +23,6 @@ RUN npm install
 COPY . /app
 RUN npm run build
 
-
 FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -64,7 +63,6 @@ RUN sed -i "s/pm.min_spare_servers = 1/pm.min_spare_servers = 10/" /usr/local/et
 RUN sed -i "s/pm.max_spare_servers = 3/pm.max_spare_servers = 15/" /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i "s/;pm.max_requests = 500/pm.max_requests = 500/" /usr/local/etc/php-fpm.d/www.conf
 
-COPY /app/docker/startup/startup.sh /app/startup.sh
 
 RUN chown -R www-data:www-data /app
 
