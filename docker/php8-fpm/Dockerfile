@@ -12,8 +12,6 @@ RUN composer install  \
     --no-scripts \
     --prefer-dist
 
-COPY docker/startup/startup-app.sh startup-app.sh
-
 RUN composer dump-autoload --optimize --classmap-authoritative
 
 
@@ -29,6 +27,8 @@ COPY . /app
 COPY \
   --from=builder \
   /app/vendor /app/vendor
+
+COPY docker/startup/startup-app.sh startup-app.sh
 
 RUN npm run build
 
