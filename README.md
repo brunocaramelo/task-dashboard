@@ -115,6 +115,8 @@ After installation, the access address is:
 
     - Vue 3
 
+    - Pest
+
     - Redis (Cache and Websocket)
 
     - Laravel Echo (Broadcast Client)
@@ -123,6 +125,6 @@ After installation, the access address is:
 
     - SOLID
 
-    - Unit Tests
+    - Unit Tests and Feature Tests
 
     - Docker and docker-compose
