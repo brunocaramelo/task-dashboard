@@ -70,7 +70,7 @@ The application is separated into the following containers
 
 3 - Enter the application's home directory and run the following commands:
     
-    1 - docker-compose up -d;
+    1 - docker compose up (to see the logs on stdout);
 
     ### Description of steps (in case of problems)
 
@@ -78,7 +78,7 @@ The application is separated into the following containers
         
         (NOTE) - due to composer's delay in bringing up the dependencies, there are 3 alternatives,
         
-            1 - RUN sudo docker-compose up; without being a daemon the first time, so that you can check the progress of the installation of dependencies.
+            1 - RUN sudo docker compose up; without being a daemon the first time, so that you can check the progress of the installation of dependencies.
             
             2 - Wait 20 minutes or so for the command to be executed, to avoid autoloading for example.
             
@@ -90,7 +90,7 @@ The application is separated into the following containers
     4 - generation of a hash key for use by the system as a validation key.
     
     5 - for the framework to run the test suite.
-        - API tests  
+        - Feature tests  
         - Unit tests
      
 
