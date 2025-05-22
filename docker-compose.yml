@@ -21,8 +21,6 @@ services:
     command: ["php", "/app/artisan", "reverb:start", "--debug"]
     env_file:
       - docker/docker-compose-env/ws-application.env
-    # volumes:
-    #   - ./:/app:rw
     links:
       - cache
   cache:
