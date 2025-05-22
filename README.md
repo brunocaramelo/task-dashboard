@@ -137,6 +137,7 @@ After installation, the access address is:
     1 - cp .env.local.example .env
     2 - php artisan reverb:start --debug
     3 - php artisan serve
-    4 - php artisan migrate && php artisan db:seed
-    5 - and check out http://localhost:8000
-    5 - php artisan test
+    4 - npm run dev OR npm run build
+    5 - php artisan migrate && php artisan db:seed
+    6 - and check out http://localhost:8000
+    7 - php artisan test
