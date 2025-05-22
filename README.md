@@ -135,9 +135,10 @@ After installation, the access address is:
     If you want to run the project locally, just run 
 
     1 - cp .env.local.example .env
-    2 - php artisan reverb:start --debug
-    3 - php artisan serve
-    4 - npm run dev OR npm run build
-    5 - php artisan migrate && php artisan db:seed
-    6 - and check out http://localhost:8000
-    7 - php artisan test
+    2 - docker compose up -d cache
+    3 - php artisan reverb:start --debug
+    4 - php artisan serve
+    5 - npm run dev OR npm run build
+    6 - php artisan migrate && php artisan db:seed
+    7 - and check out http://localhost:8000
+    8 - php artisan test
