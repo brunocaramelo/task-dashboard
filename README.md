@@ -138,9 +138,10 @@ After installation, the access address is:
     2 - If you don't have Postgre Running on local or remote : change on .env to DB_HOST=database and run (2.1). Or else, run (2.2) and change DB_* credentials
         2.1 - docker compose up -d cache database
         2.2 - docker compose up -d cache
-    3 - php artisan reverb:start --debug
-    4 - php artisan serve
-    5 - npm run dev OR npm run build
-    6 - php artisan migrate && php artisan db:seed
-    7 - and check out http://localhost:8000
-    8 - php artisan test
+    3 - composer install
+    4 - php artisan reverb:start --debug
+    5 - php artisan serve
+    6 - npm run dev OR npm run build
+    7 - php artisan migrate && php artisan db:seed
+    8 - and check out http://localhost:8000
+    9 - php artisan test
