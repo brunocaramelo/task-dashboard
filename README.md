@@ -128,3 +128,15 @@ After installation, the access address is:
     - Unit Tests and Feature Tests
 
     - Docker and docker-compose
+
+
+#### Extra
+
+    If you want to run the project locally, just run 
+
+    1 - cp .env.local.example .env
+    2 - php artisan reverb:start --debug
+    3 - php artisan serve
+    4 - php artisan migrate && php artisan db:seed
+    5 - and check out http://localhost:8000
+    5 - php artisan test
