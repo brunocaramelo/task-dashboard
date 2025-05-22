@@ -10,8 +10,6 @@ RUN composer install  \
     --no-scripts \
     --prefer-dist
 
-COPY ./docker/php-cli/certs/ca-bundle.pem ./docker/php-cli/certs/cert.pem ./docker/php-cli/certs/privkey.pem /app/
-
 RUN composer dump-autoload --optimize --classmap-authoritative
 
 FROM php:8.3-fpm

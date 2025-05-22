@@ -32,7 +32,7 @@ The application is separated into the following containers
 | --- | --- | --- |
 | postgres | postgres:15 | Main database |
 | php | php-app | Main Application (Web) |
-| php | php-cli | CLI Application running Reverb Websocket |
+| websocket-server | php-cli | CLI Application running Reverb Websocket |
 | web (nginx) and Vue 3 | nginx:alpine | Web Server |
 
 ## Requirements
