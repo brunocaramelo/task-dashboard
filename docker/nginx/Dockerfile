@@ -2,10 +2,6 @@ FROM composer:2.8.9 as builder
 
 COPY . /app
 
-COPY \
-  --from=builder \
-  /app/vendor /app/vendor
-
 WORKDIR /app
 
 RUN composer install  \
