@@ -39,7 +39,7 @@ services:
       dockerfile: ./docker/nginx/Dockerfile
     image: tasker-frontend-test-app:v1.0
     container_name: nginx-tasker
-    # restart: on-failure
+    restart: on-failure
     env_file:
       - docker/docker-compose-env/application.env
     depends_on:
@@ -59,7 +59,7 @@ services:
       dockerfile: ./docker/php8-fpm/Dockerfile
     image: task-app-container:v4.0
     container_name: task-app-container
-    # restart: on-failure
+    restart: on-failure
     ports:
       - "9000:9000"
     depends_on:
