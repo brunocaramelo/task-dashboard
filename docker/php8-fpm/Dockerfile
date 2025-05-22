@@ -21,6 +21,10 @@ FROM node:22 as build-frontend
 
 WORKDIR /app
 
+COPY \
+  --from=builder \
+  /app/vendor /app/vendor
+
 COPY ./package.json ./package-lock.json /app/
 RUN npm install
 
