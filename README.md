@@ -109,13 +109,13 @@ After installation, the access address is:
 
 ## Tecnical Details
 
-    - Laravel 10
+    - Laravel 10 (Framework Backend)
 
-    - Postgre 15
+    - Postgre 15 (Database)
 
-    - Vue 3
+    - Vue 3 (Framework Frontend)
 
-    - Pest
+    - Pest (Test Suite)
 
     - Redis (Cache and Websocket)
 
