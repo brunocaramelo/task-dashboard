@@ -15,7 +15,7 @@ This application has the following specifications:
 | --- | --- |
 | Docker | 28.1.1 |
 | Docker Compose | 2.32.4 |
-| Nginx | 1.28.0 |
+| Nginx | 1.27.5 |
 | PHP | 8.3.9 |
 | Postgre | 15.3 |
 | Sqlite (Unit Tests) | 3.46.1 |

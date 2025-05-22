@@ -1,4 +1,4 @@
-FROM composer:2.7.7 as builder
+FROM composer:2.8.9 as builder
 
 COPY . /app
 
@@ -25,6 +25,7 @@ COPY ./package.json ./package-lock.json /app/
 RUN npm install
 
 COPY . /app
+
 RUN npm run build
 
 
