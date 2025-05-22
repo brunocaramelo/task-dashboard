@@ -21,14 +21,14 @@ FROM node:22 as build-frontend
 
 WORKDIR /app
 
-COPY \
-  --from=builder \
-  /app/vendor /app/vendor
-
 COPY ./package.json ./package-lock.json /app/
 RUN npm install
 
 COPY . /app
+
+COPY \
+  --from=builder \
+  /app/vendor /app/vendor
 
 RUN npm run build
 
@@ -55,12 +55,7 @@ RUN apt-get update && apt-get install -y \
       zip \
       opcache
 
-COPY --from=builder /app /app
-
-COPY \
-  --from=build-frontend \
-  --chown=www-data:www-data \
-  /app/public /app/public
+COPY --from=build-frontend /app /app
 
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 

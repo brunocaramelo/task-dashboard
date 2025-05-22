@@ -32,6 +32,10 @@ RUN npm install
 
 COPY . /app
 
+COPY \
+  --from=builder \
+  /app/vendor /app/vendor
+
 RUN npm run build
 
 FROM nginx:1.27.5-alpine
