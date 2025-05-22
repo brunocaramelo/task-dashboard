@@ -55,7 +55,7 @@ The application is separated into the following containers
 
 2 - Check that the ports:
 
-    - 443 (nginx) 
+    - 80 (nginx) 
     
     - 6380 (redis) 
     
@@ -98,7 +98,7 @@ The application is separated into the following containers
 
 After installation, the access address is:
 
-- https://localhost/login
+- http://localhost/login
 
 ### Users Credentials
 | E-mail | Name | Password

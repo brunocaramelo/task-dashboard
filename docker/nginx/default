@@ -1,24 +1,17 @@
-# Example configuration:
+# Backend do PHP
 upstream fastcgi_backend {
-    server   php:9000;
+    server php:9000;
 }
 
+# Servidor HTTP (porta 80)
 server {
-    listen       443 ssl;
-
+    listen 80;
     server_name localhost;
-    ssl_certificate     /etc/nginx/certs/nginx-selfsigned.crt;
-    ssl_certificate_key /etc/nginx/certs/nginx-selfsigned.key;
 
-    index  index.html index.htm index.php;
-
-    root  /app/public;
-
+    root /app/public;
+    index index.html index.htm index.php;
 
     location / {
-        root      /app/public;
-        autoindex off;
-        index     index.html index.htm index.php;
         try_files $uri $uri/ /index.php?$query_string;
     }
 
@@ -29,17 +22,56 @@ server {
         proxy_set_header Connection "upgrade";
         proxy_set_header Host $host;
 
-        # Configurações adicionais recomendadas
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        # Timeouts aumentados para WebSockets
         proxy_read_timeout 86400s;
         proxy_send_timeout 86400s;
-   }
+    }
 
-   location ~ \.php$ {
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass fastcgi_backend;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}
+
+# Servidor HTTPS (porta 443)
+server {
+    listen 443 ssl;
+    server_name localhost;
+
+    ssl_certificate     /etc/nginx/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/nginx/certs/nginx-selfsigned.key;
+
+    root /app/public;
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location /ws {
+        proxy_pass http://websocket-server:8182;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+    }
+
+    location ~ \.php$ {
         try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass fastcgi_backend;
