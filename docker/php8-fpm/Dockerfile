@@ -14,25 +14,6 @@ RUN composer install  \
 
 RUN composer dump-autoload --optimize --classmap-authoritative
 
-
-FROM node:22 as build-frontend
-
-WORKDIR /app
-
-COPY ./package.json ./package-lock.json /app/
-RUN npm install
-
-COPY . /app
-
-COPY \
-  --from=builder \
-  /app/vendor /app/vendor
-
-COPY docker/startup/startup-app.sh startup-app.sh
-
-RUN npm run build
-
-
 FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -55,7 +36,7 @@ RUN apt-get update && apt-get install -y \
       zip \
       opcache
 
-COPY --from=build-frontend /app /app
+COPY --from=builder /app /app
 
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
