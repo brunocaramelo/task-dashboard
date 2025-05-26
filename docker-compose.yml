@@ -4,7 +4,7 @@ services:
     image: postgres:15
     container_name: postgres-tasker-app
     volumes:
-      - ~/.docker/postgres15-data:/var/lib/postgresql/data:rw
+      - postgres15-data:/var/lib/postgresql/data:rw
     ports:
       - "5432:5432"
     env_file:
@@ -33,7 +33,7 @@ services:
     container_name: redis-tasker
     command: ['redis-server', '--bind','0.0.0.0','--requirepass', 'testes','--port','6380']
     volumes:
-      - ~/.docker/redis-data-latest:/data
+      - redis-data:/data
     ports:
     - "6380:6380"
 
@@ -50,13 +50,10 @@ services:
     depends_on:
       - php
       - websocket-server
-    volumes_from:
-      - php
     volumes:
       - ./docker/nginx/default:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/certs:/etc/nginx/certs
-      - ./:/app:rw
-      - tasker_frontendnuild_volume:/app/public
+      - frontendnuild-volume:/app/public/build:rw
     ports:
       - 80:80
       - 443:443
@@ -80,11 +77,14 @@ services:
       - cache
       - websocket-server
     volumes:
-        - tasker_vendor_volume:/app/vendor
-        - ./:/app:rw
+        - /app/vendor
+        - frontendnuild-volume:/app/public/build:ro
+        # - ./:/app:rw
 volumes:
-   tasker_vendor_volume:
-    driver: local
-   tasker_frontendnuild_volume:
+   frontendnuild-volume:
+       driver: local
+   postgres15-data:
+       driver: local
+   redis-data:
        driver: local
 
