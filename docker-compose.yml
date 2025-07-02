@@ -38,51 +38,36 @@ services:
     - "6380:6380"
 
 
-  web:
+  webserver:
     build:
       context: .
-      dockerfile: ./docker/nginx/Dockerfile
-    image: tasker-frontend-test-app:v1.0
-    container_name: nginx-tasker
+      dockerfile: ./docker/webserver/dockerfile/webserver.dockerfile
+    container_name: webserver-boiler-plate
     restart: on-failure
-    env_file:
-      - docker/docker-compose-env/application.env
-    depends_on:
-      - php
-      - websocket-server
     volumes:
-      - ./docker/nginx/default:/etc/nginx/conf.d/default.conf
-      - ./docker/nginx/certs:/etc/nginx/certs
-      - frontendnuild-volume:/app/public/build:rw
+     - .:/app:rw
+     - composer-vendor-data:/app/vendor:rw
+     - vite-compiled-data:/app/public/build:rw
+     - ./docker/webserver/startup/startup.sh:/app/startup.sh
     ports:
       - 80:80
-      - 443:443
-  php:
-    build:
-      context: .
-      dockerfile: ./docker/php8-fpm/Dockerfile
-    image: task-app-container:v4.0
-    container_name: task-app-container
-    restart: on-failure
-    ports:
-      - "9000:9000"
+      - 8003:8003
     depends_on:
-      database:
-        condition: service_healthy
-    command: ["/bin/bash", "-c", "./startup-app.sh"]
+      - database
+      - cache
+      - websocket-server
     env_file:
       - docker/docker-compose-env/application.env
     links:
       - database
       - cache
       - websocket-server
-    volumes:
-        - /app/vendor
-        - frontendnuild-volume:/app/public/build:ro
-        # - ./:/app:rw
+
 volumes:
-   frontendnuild-volume:
-       driver: local
+   composer-vendor-data:
+    driver: "local"
+   vite-compiled-data:
+    driver: "local"
    postgres15-data:
        driver: local
    redis-data:

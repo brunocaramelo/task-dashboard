@@ -15,7 +15,7 @@ This application has the following specifications:
 | --- | --- |
 | Docker | 28.1.1 |
 | Docker Compose | 2.32.4 |
-| Nginx | 1.27.5 |
+| FRANKENPHP (WEBSERVER) | 8.3.9 |
 | PHP | 8.3.9 |
 | Postgre | 15.3 |
 | Sqlite (Unit Tests) | 3.46.1 |
@@ -33,7 +33,7 @@ The application is separated into the following containers
 | postgres | postgres:15 | Main database |
 | php | php-app | Main Application (Web) |
 | websocket-server | php-cli | CLI Application running Reverb Websocket |
-| web (nginx) and Vue 3 | nginx:alpine | Web Server |
+| webserver and Vue 3 | dunglas/frankenphp:1.1.3-php8.3 | Web Server |
 
 ## Requirements
     - Docker
@@ -55,7 +55,7 @@ The application is separated into the following containers
 
 2 - Check that the ports:
 
-    - 80 (nginx) 
+    - 80 (webserver) 
     
     - 6380 (redis) 
     
