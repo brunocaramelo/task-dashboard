@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Application\Shared\Traits;
+namespace Src\Domain\Shared\Traits;
 
 trait StringFormaTrait
 {

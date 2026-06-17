@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Application\Users\UseCases;
+namespace Src\Application\Tasks\UseCases;
 
 use Src\Domain\Users\Interfaces\UserRepositoryInterface;
 use Src\Application\Users\Dto\UserDto;

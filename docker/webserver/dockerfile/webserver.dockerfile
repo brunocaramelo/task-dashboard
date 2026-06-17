@@ -1,44 +1,4 @@
-FROM composer:2.7.7 as builder
-
-COPY . /app
-
-RUN composer install  \
-    --ignore-platform-reqs \
-    --no-ansi \
-    --no-autoloader \
-    --no-interaction \
-    --no-scripts \
-    --prefer-dist
-
-RUN composer dump-autoload --optimize --classmap-authoritative
-
-FROM node:22 as build-frontend
-
-WORKDIR /app
-
-COPY ./package.json ./package-lock.json /app/
-
-COPY \
-  --from=builder \
-  /app/vendor /app/vendor
-
-RUN npm install
-
-COPY . /app
-
-RUN mkdir -p /app/build
-
-RUN npm run build
-
-#RUN cp /app/public/build/.vite/manifest.json /app/public/build/manifest.json
-
-
-FROM dunglas/frankenphp:1.1.3-php8.3
-
-COPY --from=build-frontend /app /app
-
-#COPY --from=build-frontend /app/build /app/build
-
+FROM dunglas/frankenphp:1.3.6-php8.4
 
 ENV WEBSERVER_PORT=${WEBSERVER_PORT:-8003}
 

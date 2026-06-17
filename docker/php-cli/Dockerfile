@@ -1,18 +1,4 @@
-FROM composer:2.8.9 as builder
-
-COPY . /app
-
-RUN composer install  \
-    --ignore-platform-reqs \
-    --no-ansi \
-    --no-autoloader \
-    --no-interaction \
-    --no-scripts \
-    --prefer-dist
-
-RUN composer dump-autoload --optimize --classmap-authoritative
-
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 RUN apt-get update && apt-get install -y \
       zlib1g-dev \
@@ -41,8 +27,6 @@ RUN apt-get update && apt-get install -y \
       zip \
       sockets \
       opcache
-
-COPY --from=builder /app /app
 
 RUN pecl install pcov && docker-php-ext-enable pcov
 

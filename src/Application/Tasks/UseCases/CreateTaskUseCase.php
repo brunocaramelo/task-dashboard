@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Task\UseCases;
+namespace Src\Application\Tasks\UseCases;
 
 use Src\Domain\Tasks\Interfaces\TaskRepository;
 use Src\Application\Tasks\Dto\TaskDto;

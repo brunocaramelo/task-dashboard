@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Application\Task\UseCases;
+namespace Src\Application\Tasks\UseCases;
 
 use Src\Domain\Tasks\Interfaces\TaskRepository;
 use Src\Application\Tasks\Dto\TaskDto;
 
 use Src\Infrastructure\Tasks\Events\TaskCreatedSend;
 
-class CreateTaskUseCase
+class UpdateTaskUseCase
 {
     public function __construct(
         private TaskRepository $repository

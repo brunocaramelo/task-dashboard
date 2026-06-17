@@ -46,8 +46,8 @@ services:
     restart: on-failure
     volumes:
      - .:/app:rw
-     - composer-vendor-data:/app/vendor:rw
-     - vite-compiled-data:/app/public/build:rw
+    #  - composer-vendor-data:/app/vendor:rw
+    #  - vite-compiled-data:/app/public/build:rw
      - ./docker/webserver/startup/startup.sh:/app/startup.sh
     ports:
       - 80:80
@@ -62,6 +62,23 @@ services:
       - database
       - cache
       - websocket-server
+  compiler:
+    build:
+      context: .
+      dockerfile: ./docker/compiler/dockerfile/compiler.dockerfile
+    container_name: compiler-tasks-maintances
+    working_dir: /app
+    volumes:
+     - .:/app:rw
+    command:  >
+            sh -c "
+                composer install --optimize-autoloader &&
+                mkdir -p /app/build &&
+                npm install --ignore-engines &&
+                npm ci --ignore-engines --no-audit --no-fund &&
+                npm run build
+            "
+    profiles: ["compiler"]
 
 volumes:
    composer-vendor-data:

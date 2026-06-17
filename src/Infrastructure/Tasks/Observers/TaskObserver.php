@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace Src\Infrastructure\Tasks\Observers;
 
 use App\Actions\Cache\{CleanCacheByTagAndKeysAction,
                        CleanCacheByTagsAction};
