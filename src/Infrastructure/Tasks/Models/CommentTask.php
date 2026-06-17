@@ -4,7 +4,7 @@ namespace Src\Infrastructure\Tasks\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Task;
+use Src\Infrastructure\Tasks\Models\Task;
 use Src\Infrastructure\Users\Models\User;
 
 use Illuminate\Database\Eloquent\SoftDeletes;

@@ -22,7 +22,7 @@ class HomeController extends Controller
     public function dashboard()
     {
         return Inertia::render('Dashboard', [
-            'lastsTasks' => $this->taskService->searchPaginate([
+            'lastsTasks' => $this->searchTasksUseCase->execute([
                 'page_limit' => 4,
             ]),
             'counters' => $this->getCountersByStatus(),

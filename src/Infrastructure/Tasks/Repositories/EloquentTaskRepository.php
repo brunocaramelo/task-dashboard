@@ -6,19 +6,19 @@ namespace Src\Infrastructure\Tasks\Repositories;
 
 use Src\Application\Tasks\Dto\TaskDto;
 
-use App\Models\Task;
-use App\Interfaces\TaskInterface;
+use Src\Infrastructure\Tasks\Models\Task;
+use Src\Domain\Tasks\Interfaces\TaskRepositoryInterface;
 
-use App\Models\StatusTask;
+use Src\Infrastructure\Tasks\Models\StatusTask;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class EloquentTaskRepository implements TaskInterface
+class EloquentTaskRepository implements TaskRepositoryInterface
 {
     private $model = Task::class;
 
-    public function searchPaginate(array $filters) : TaskDto
+    public function searchPaginate(array $filters) : LengthAwarePaginator
     {
         return cache()->tags(['tasksList'])
             ->remember('tasksList:'.json_encode($filters), config('cache.default_duration'), function () use ($filters){

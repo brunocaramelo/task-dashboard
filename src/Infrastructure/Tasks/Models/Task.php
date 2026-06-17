@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Src\Infrastructure\Users\Models\User;
-use App\Models\StatusTask;
-use App\Models\CommentTask;
+use Src\Infrastructure\Tasks\Models\StatusTask;
+use Src\Infrastructure\Tasks\Models\CommentTask;
 
 use Illuminate\Database\Eloquent\Builder;
 class Task extends Model

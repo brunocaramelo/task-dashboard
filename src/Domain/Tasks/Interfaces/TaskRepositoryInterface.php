@@ -7,7 +7,6 @@ namespace Src\Domain\Tasks\Interfaces;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Models\Task;
 use Src\Application\Tasks\Dto\TaskDto;
 
 interface TaskRepositoryInterface
@@ -15,6 +14,6 @@ interface TaskRepositoryInterface
     public function searchPaginate(array $filters) : LengthAwarePaginator;
     public function update(array $data, $id) : TaskDto;
     public function create(array $data) : TaskDto;
-    public function getItem($idItem) : Task;
+    public function getItem($idItem) : TaskDto;
     public function getStatusList() : Collection;
 }

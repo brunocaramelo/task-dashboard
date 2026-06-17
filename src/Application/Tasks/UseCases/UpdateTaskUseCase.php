@@ -2,7 +2,7 @@
 
 namespace Src\Application\Tasks\UseCases;
 
-use Src\Domain\Tasks\Interfaces\TaskRepository;
+use Src\Domain\Tasks\Interfaces\TaskRepositoryInterface;
 use Src\Application\Tasks\Dto\TaskDto;
 
 use Src\Infrastructure\Tasks\Events\TaskCreatedSend;
@@ -10,7 +10,7 @@ use Src\Infrastructure\Tasks\Events\TaskCreatedSend;
 class UpdateTaskUseCase
 {
     public function __construct(
-        private TaskRepository $repository
+        private TaskRepositoryInterface $repository
     ) {}
 
     public function execute(array $data,string $id) : TaskDto

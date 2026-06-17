@@ -15,7 +15,7 @@ use Src\Application\Tasks\UseCases\{GetTaskByIdUseCase,
 
 use Src\Application\Users\UseCases\UserSearchGetUseCase;
 
-use App\Traits\StringFormaTrait;
+use Src\Domain\Shared\Traits\StringFormaTrait;
 
 class TaskBoardController extends Controller
 {
@@ -47,8 +47,8 @@ class TaskBoardController extends Controller
     public function createForm()
     {
         return Inertia::render('Tasks/New', [
-            'users' => $this->userSearchUseCase->execute([]),
-            'statusList' => $this->getTaskStatusListUseCase->execute(false),
+            'users' => $this->userSearchUseCase->execute([])->toArray(),
+            'statusList' => $this->getTaskStatusListUseCase->execute(false)->toArray(),
             'csrfToken' => csrf_token(),
         ]);
     }
@@ -66,9 +66,9 @@ class TaskBoardController extends Controller
     public function updateForm($id)
     {
         return Inertia::render('Tasks/Edit', [
-            'users' => $this->userSearchUseCase->searchGet([]),
+            'users' => $this->userSearchUseCase->execute([]),
             'statusList' => $this->getTaskStatusListUseCase->execute(false),
-            'task' => $this->getTaskByIdUseCase->execute($id),
+            'task' => $this->getTaskByIdUseCase->execute($id)->toArray(),
             'csrfToken' => csrf_token(),
         ]);
     }

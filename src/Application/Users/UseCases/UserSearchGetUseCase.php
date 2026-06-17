@@ -15,7 +15,7 @@ class UserSearchGetUseCase
         $this->userRepository = $userRepository;
     }
 
-    public function handle(array $data)
+    public function execute(array $data)
     {
         return $this->userRepository->searchGet($data);
     }

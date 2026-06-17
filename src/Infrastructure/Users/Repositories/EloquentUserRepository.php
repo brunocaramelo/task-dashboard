@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Src\Infrastructure\Users\Repositories;
 
 use Src\Infrastructure\Users\Models\User;
-use App\Interfaces\UserInterface;
+use Src\Domain\Users\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 
-class EloquentUserRepository implements UserInterface
+class EloquentUserRepository implements UserRepositoryInterface
 {
     private $model = User::class;
 

@@ -20,7 +20,8 @@ services:
       dockerfile: ./docker/php-cli/Dockerfile
     image: tasker-websocket-app:v1.0
     container_name: websocket-tasker
-    # restart: on-failure
+    volumes:
+     - .:/app:rw
     ports:
       - "8182:8182"
     command: ["php", "/app/artisan", "reverb:start", "--debug"]
@@ -46,8 +47,6 @@ services:
     restart: on-failure
     volumes:
      - .:/app:rw
-    #  - composer-vendor-data:/app/vendor:rw
-    #  - vite-compiled-data:/app/public/build:rw
      - ./docker/webserver/startup/startup.sh:/app/startup.sh
     ports:
       - 80:80
@@ -68,6 +67,8 @@ services:
       dockerfile: ./docker/compiler/dockerfile/compiler.dockerfile
     container_name: compiler-tasks-maintances
     working_dir: /app
+    env_file:
+      - docker/docker-compose-env/ws-application.env
     volumes:
      - .:/app:rw
     command:  >

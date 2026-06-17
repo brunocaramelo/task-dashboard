@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\{TaskBoardController,
+use Src\Presenter\Users\Controllers\ProfileController;
+use Src\Presenter\Tasks\Controllers\{TaskBoardController,
                          HomeController};
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

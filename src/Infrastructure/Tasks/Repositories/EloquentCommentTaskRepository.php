@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Src\Infrastructure\Tasks\Repositories;
 
-use App\Models\CommentTask;
-use App\Interfaces\CommentTaskInterface;
+use Src\Infrastructure\Tasks\Models\CommentTask;
+
+use Src\Domain\Tasks\Interfaces\TaskRepositoryInterface;
 use Src\Application\Tasks\Dto\CommentTaskDto;
 
-class EloquentCommentTaskRepository implements CommentTaskInterface
+class EloquentCommentTaskRepository implements TaskRepositoryInterface
 {
     private $model = CommentTask::class;
 

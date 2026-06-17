@@ -6,6 +6,10 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Src\Infrastructure\Tasks\Models\Task;
 
+use Src\Infrastructure\Tasks\Models\StatusTask;
+use Src\Infrastructure\Users\Models\User;
+
+
 class TaskAppSeeder extends Seeder
 {
     /**
@@ -15,16 +19,17 @@ class TaskAppSeeder extends Seeder
      */
     public function run()
     {
+        $userskAll = User::all();
 
         $users = [
             [
                 'title' => 'Task 1 Seeded',
                 'code' => 'PBI-1',
                 'description' => 'Description about this test',
-                'rapporteur_id' => 2,
-                'responsible_id' => 3,
-                'status_id' => 1,
-                'author_id' => 1,
+                'rapporteur_id' => User::skip(1)->first()->id,
+                'responsible_id' => User::latest()->first()->id,
+                'status_id' => StatusTask::first()->id,
+                'author_id' => User::first()->id,
             ]
         ];
 
