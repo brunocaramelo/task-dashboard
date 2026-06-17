@@ -4,7 +4,7 @@ namespace Src\Infrastructure\Users\Observers;
 
 use App\Actions\Cache\CleanCacheByTagsAction;
 
-use App\Models\User;
+use Src\Infrastructure\Users\Models\User;
 
 class UserObserver
 {

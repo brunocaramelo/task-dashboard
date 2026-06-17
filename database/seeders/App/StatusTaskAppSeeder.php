@@ -4,6 +4,7 @@ namespace Database\Seeders\App;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Src\Infrastructure\Tasks\Models\StatusTask;
 
 class StatusTaskAppSeeder extends Seeder
 {
@@ -30,11 +31,11 @@ class StatusTaskAppSeeder extends Seeder
         ];
 
         foreach ($users as $userData) {
-            if(\App\Models\StatusTask::where('slug', $userData['slug'])->exists()) {
+            if(StatusTask::where('slug', $userData['slug'])->exists()) {
                 continue;
             }
 
-            \App\Models\StatusTask::create(
+            StatusTask::create(
                 $userData
             );
 

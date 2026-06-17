@@ -4,6 +4,7 @@ namespace Database\Seeders\App;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Src\Infrastructure\Tasks\Models\Task;
 
 class TaskAppSeeder extends Seeder
 {
@@ -29,11 +30,11 @@ class TaskAppSeeder extends Seeder
 
         foreach ($users as $userData) {
 
-            if(\App\Models\Task::where('code', $userData['code'])->exists()) {
+            if(Task::where('code', $userData['code'])->exists()) {
                 continue;
             }
 
-            \App\Models\Task::create(
+            Task::create(
                 $userData
             );
         }

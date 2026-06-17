@@ -14,7 +14,7 @@ beforeEach(function () {
 
     runSeeder(DatabaseTestSeeder::class);
 
-    $this->actingAs(\App\Models\User::first());
+    $this->actingAs(\Src\Infrastructure\Users\Models\User::first());
 
     $this->taskService = new TaskService(new TaskRepository());
     $this->userService = new UsersService(new UserRepository());

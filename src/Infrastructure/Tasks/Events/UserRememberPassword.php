@@ -5,7 +5,7 @@ namespace Src\Infrastructure\Tasks\Events;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Broadcasting\InteractsWithBroadcasting;
-use App\Models\User;
+use Src\Infrastructure\Users\Models\User;
 
 class UserRememberPassword
 {

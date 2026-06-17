@@ -4,6 +4,7 @@ namespace Database\Seeders\Tests;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Src\Infrastructure\Tasks\Models\Task;
 
 class TaskTesterSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class TaskTesterSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Task::create([
+        Task::create([
             'title' => 'Task 1',
             'code' => 'task-1',
             'rapporteur_id' => 2,

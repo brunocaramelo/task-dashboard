@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Models\User;
+use Src\Infrastructure\Users\Models\User;
 use App\Models\StatusTask;
 use App\Models\CommentTask;
 

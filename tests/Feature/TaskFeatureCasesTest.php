@@ -10,7 +10,7 @@ beforeEach(function () {
 
 function getMockUserToSession()
 {
-    return \App\Models\User::first();
+    return \Src\Infrastructure\Users\Models\User::first();
 }
 
 it('renders the dashboard page with correct data', function () {
@@ -22,13 +22,6 @@ it('renders the dashboard page with correct data', function () {
                 ->has('lastsTasks')
                 ->has('counters', 3)
         );
-
-    // $response = $this->actingAs(getMockUserToSession())
-    //              ->get('/dashboard');
-
-    // dd($response->status(),
-    // $response->headers->all(),
-    // );
 });
 
 it('renders the task search page with correct data', function () {

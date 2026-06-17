@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Infrastructure\Users\Repositories;
 
-use App\Models\User;
+use Src\Infrastructure\Users\Models\User;
 use App\Interfaces\UserInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;

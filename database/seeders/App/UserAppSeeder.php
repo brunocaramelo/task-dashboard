@@ -5,6 +5,8 @@ namespace Database\Seeders\App;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+use Src\Infrastructure\Users\Models\User;
+
 class UserAppSeeder extends Seeder
 {
     /**
@@ -34,11 +36,11 @@ class UserAppSeeder extends Seeder
 
         foreach ($users as $userData) {
 
-            if(\App\Models\User::where('email', $userData['email'])->exists()) {
+            if(User::where('email', $userData['email'])->exists()) {
                 continue;
             }
 
-            \App\Models\User::create(
+            User::create(
                 $userData
             );
         }

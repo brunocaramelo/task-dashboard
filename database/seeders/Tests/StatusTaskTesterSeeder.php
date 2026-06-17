@@ -5,6 +5,8 @@ namespace Database\Seeders\Tests;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+use Src\Infrastructure\Tasks\Models\StatusTask;
+
 class StatusTaskTesterSeeder extends Seeder
 {
     /**
@@ -14,17 +16,17 @@ class StatusTaskTesterSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\StatusTask::create([
+        StatusTask::create([
             'name' => 'Pending',
             'slug' => 'pending',
         ]);
 
-        \App\Models\StatusTask::create([
+        StatusTask::create([
             'name' => 'Completed',
             'slug' => 'completed',
         ]);
 
-        \App\Models\StatusTask::create([
+        StatusTask::create([
             'name' => 'Blocked',
             'slug' => 'blocked',
         ]);
