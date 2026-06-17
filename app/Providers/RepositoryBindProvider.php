@@ -11,9 +11,9 @@ class RepositoryBindProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind('App\Interfaces\TaskInterface', 'App\Repositories\TaskRepository');
-        $this->app->bind('App\Interfaces\CommentTaskInterface', 'App\Repositories\CommentTaskRepository');
-        $this->app->bind('App\Interfaces\UserInterface', 'App\Repositories\UserRepository');
+        $this->app->bind('Src\Domain\Tasks\Interfaces\TaskRepositoryInterface', 'Src\Infrastructure\Tasks\Repositories\TaskRepository');
+        $this->app->bind('Src\Domain\Tasks\Interfaces\CommentTasRepositoryInterface', 'Src\Infrastructure\Tasks\Repositories\CommentTaskRepository');
+        $this->app->bind('Src\Domain\Users\Interfaces\UserRepositoryInterface', 'Src\Infrastructure\Users\Repositories\UserRepository');
     }
 
     /**

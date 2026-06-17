@@ -3,11 +3,13 @@
 
 namespace App\Providers;
 
-use App\Models\{Task,
-                CommentTask,
-                User};
+use Src\Infrastructure\Tasks\Models\{Task,
+                CommentTask};
 
-use App\Observers\{TaskObserver,
+use Src\Infrastructure\Tasks\Models\User;
+
+
+use Src\Infrastructure\Tasks\Observers\{TaskObserver,
                   CommentTaskObserver,
                   UserObserver};
 
