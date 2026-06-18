@@ -29,6 +29,23 @@ services:
       - docker/docker-compose-env/ws-application.env
     links:
       - cache
+  unit-tests:
+    build:
+      context: .
+      dockerfile: ./docker/php-cli/Dockerfile
+    image: tasker-unit-tests:v1.0
+    container_name: tasker-unit-tests
+    volumes:
+     - .:/app:rw
+     - ./docker/docker-compose-env/testing.env:/app/.env
+    command: >
+        sh -c "
+        php artisan config:clear &&
+        php artisan cache:clear &&
+        php artisan test
+        "
+    profiles: ["testing"]
+
   cache:
     image: redis:alpine
     container_name: redis-tasker
@@ -82,10 +99,6 @@ services:
     profiles: ["compiler"]
 
 volumes:
-   composer-vendor-data:
-    driver: "local"
-   vite-compiled-data:
-    driver: "local"
    postgres15-data:
        driver: local
    redis-data:

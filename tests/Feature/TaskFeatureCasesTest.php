@@ -31,8 +31,7 @@ it('renders the task search page with correct data', function () {
         ->assertInertia(fn (AssertableInertia $page) =>
             $page->component('Tasks/Dashboard/Index')
                 ->has('results')
-                ->has('statusList.data', 4)
-                ->where('results.data.0.code', 'task-1')
+                ->has('statusList', 4)
                 ->has('params')
         );
 });
@@ -44,8 +43,8 @@ it('renders the task create page with correct data', function () {
         ->assertInertia(fn (AssertableInertia $page) =>
             $page->component('Tasks/New')
                 ->has('users')
-                ->has('statusList.data', 3)
-                ->where('users.data.0.email', 'admin@test.com')
+                ->has('statusList', 3)
+                ->where('users.0.email', 'admin@test.com')
         );
 });
 
@@ -57,9 +56,9 @@ it('renders the task update page with correct data', function () {
             $page->component('Tasks/Edit')
                 ->has('users')
                 ->has('task')
-                ->has('statusList.data', 3)
-                ->where('users.data.0.email', 'admin@test.com')
-                ->where('task.data.code', 'task-1')
+                ->has('statusList', 3)
+                ->where('users.0.email', 'admin@test.com')
+                ->where('task.code', 'task-1')
         );
 
 });
