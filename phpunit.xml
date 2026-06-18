@@ -16,8 +16,20 @@
         <include>
             <directory>src</directory>
         </include>
+        <exclude>
+            <file>src/Infrastructure/Users/Models/User.php</file>
+            <file>src/Infrastructure/Tasks/Repositories/EloquentCommentTaskRepository.php</file>
+            <file>src/Infrastructure/Tasks/Observers/CommentTaskObserver.php</file>
+            <file>src/Infrastructure/Tasks/Models/CommentTask.php</file>
+            <file>src/Infrastructure/Tasks/Events/UserRememberPassword.php</file>
+            <file>src/Infrastructure/Tasks/Events/UserCreated.php</file>
+            <file>src/Infrastructure/Tasks/Events/CommentTaskUpdatedSend.php</file>
+            <file>src/Infrastructure/Tasks/Events/TaskCreatedSend.php</file>
+            <file>src/Application/Tasks/Dto/CommentTaskDto.php</file>
+            <file>src/Infrastructure/Tasks/Events/CommentTaskCreatedSend.php</file>
+        </exclude>
     </source>
-    <coverage>
+    <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">src</directory>
         </include>

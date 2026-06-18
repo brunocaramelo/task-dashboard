@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1781791747">
-  <project timestamp="1781791747" name="Clover Coverage">
+<coverage generated="1781807970">
+  <project timestamp="1781807970" name="Clover Coverage">
     <package name="Src\Application\Tasks\Dto">
-      <file name="/app/src/Application/Tasks/Dto/CommentTaskDto.php">
-        <class name="Src\Application\Tasks\Dto\CommentTaskDto" namespace="Src\Application\Tasks\Dto">
-          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
-        </class>
-        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="15" type="stmt" count="0"/>
-        <metrics loc="17" ncloc="17" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
-      </file>
       <file name="/app/src/Application/Tasks/Dto/StatusTaskDto.php">
         <class name="Src\Application\Tasks\Dto\StatusTaskDto" namespace="Src\Application\Tasks\Dto">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
@@ -137,67 +129,6 @@
       <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="Src\Infrastructure\Tasks\Events">
-      <file name="/app/src/Infrastructure/Tasks/Events/CommentTaskCreatedSend.php">
-        <class name="Src\Infrastructure\Tasks\Events\CommentTaskCreatedSend" namespace="Src\Infrastructure\Tasks\Events">
-          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
-        </class>
-        <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="25" type="stmt" count="0"/>
-        <line num="26" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="0"/>
-        <line num="29" type="stmt" count="0"/>
-        <line num="30" type="stmt" count="0"/>
-        <line num="31" type="stmt" count="0"/>
-        <line num="32" type="stmt" count="0"/>
-        <line num="34" type="stmt" count="0"/>
-        <line num="42" type="method" name="broadcastOn" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="44" type="stmt" count="0"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <line num="48" type="method" name="broadcastAs" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="50" type="stmt" count="0"/>
-        <metrics loc="53" ncloc="45" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
-      </file>
-      <file name="/app/src/Infrastructure/Tasks/Events/CommentTaskUpdatedSend.php">
-        <class name="Src\Infrastructure\Tasks\Events\CommentTaskUpdatedSend" namespace="Src\Infrastructure\Tasks\Events">
-          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
-        </class>
-        <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="21" type="stmt" count="0"/>
-        <line num="22" type="stmt" count="0"/>
-        <line num="24" type="stmt" count="0"/>
-        <line num="25" type="stmt" count="0"/>
-        <line num="26" type="stmt" count="0"/>
-        <line num="27" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="0"/>
-        <line num="30" type="stmt" count="0"/>
-        <line num="38" type="method" name="broadcastOn" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="40" type="stmt" count="0"/>
-        <line num="41" type="stmt" count="0"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="44" type="method" name="broadcastAs" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <metrics loc="49" ncloc="44" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
-      </file>
-      <file name="/app/src/Infrastructure/Tasks/Events/TaskCreatedSend.php">
-        <class name="Src\Infrastructure\Tasks\Events\TaskCreatedSend" namespace="Src\Infrastructure\Tasks\Events">
-          <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
-        </class>
-        <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="21" type="stmt" count="2"/>
-        <line num="23" type="stmt" count="2"/>
-        <line num="24" type="stmt" count="2"/>
-        <line num="25" type="stmt" count="2"/>
-        <line num="26" type="stmt" count="2"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="36" type="method" name="broadcastOn" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="38" type="stmt" count="2"/>
-        <line num="39" type="stmt" count="2"/>
-        <line num="40" type="stmt" count="2"/>
-        <line num="42" type="method" name="broadcastAs" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="44" type="stmt" count="2"/>
-        <metrics loc="47" ncloc="42" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
-      </file>
       <file name="/app/src/Infrastructure/Tasks/Events/TaskUpdatedSend.php">
         <class name="Src\Infrastructure\Tasks\Events\TaskUpdatedSend" namespace="Src\Infrastructure\Tasks\Events">
           <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
@@ -217,42 +148,8 @@
         <line num="46" type="stmt" count="2"/>
         <metrics loc="49" ncloc="44" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
       </file>
-      <file name="/app/src/Infrastructure/Tasks/Events/UserCreated.php">
-        <class name="Src\Infrastructure\Tasks\Events\UserCreated" namespace="Src\Infrastructure\Tasks\Events">
-          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
-        </class>
-        <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="18" type="stmt" count="0"/>
-        <metrics loc="21" ncloc="21" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
-      </file>
-      <file name="/app/src/Infrastructure/Tasks/Events/UserRememberPassword.php">
-        <class name="Src\Infrastructure\Tasks\Events\UserRememberPassword" namespace="Src\Infrastructure\Tasks\Events">
-          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
-        </class>
-        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="19" type="stmt" count="0"/>
-        <line num="20" type="stmt" count="0"/>
-        <metrics loc="23" ncloc="23" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
-      </file>
     </package>
     <package name="Src\Infrastructure\Tasks\Models">
-      <file name="/app/src/Infrastructure/Tasks/Models/CommentTask.php">
-        <class name="Src\Infrastructure\Tasks\Models\CommentTask" namespace="Src\Infrastructure\Tasks\Models">
-          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
-        </class>
-        <line num="23" type="method" name="task" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="25" type="stmt" count="0"/>
-        <line num="26" type="stmt" count="0"/>
-        <line num="27" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="0"/>
-        <line num="29" type="stmt" count="0"/>
-        <line num="32" type="method" name="responsable" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="34" type="stmt" count="0"/>
-        <line num="35" type="stmt" count="0"/>
-        <line num="36" type="stmt" count="0"/>
-        <line num="37" type="stmt" count="0"/>
-        <metrics loc="41" ncloc="41" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
-      </file>
       <file name="/app/src/Infrastructure/Tasks/Models/StatusTask.php">
         <class name="Src\Infrastructure\Tasks\Models\StatusTask" namespace="Src\Infrastructure\Tasks\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -300,27 +197,6 @@
       </file>
     </package>
     <package name="Src\Infrastructure\Tasks\Observers">
-      <file name="/app/src/Infrastructure/Tasks/Observers/CommentTaskObserver.php">
-        <class name="Src\Infrastructure\Tasks\Observers\CommentTaskObserver" namespace="Src\Infrastructure\Tasks\Observers">
-          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
-        </class>
-        <line num="14" type="method" name="created" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="16" type="stmt" count="0"/>
-        <line num="17" type="stmt" count="0"/>
-        <line num="18" type="stmt" count="0"/>
-        <line num="19" type="stmt" count="0"/>
-        <line num="25" type="method" name="updated" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="27" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="0"/>
-        <line num="29" type="stmt" count="0"/>
-        <line num="30" type="stmt" count="0"/>
-        <line num="36" type="method" name="deleted" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="38" type="stmt" count="0"/>
-        <line num="39" type="stmt" count="0"/>
-        <line num="40" type="stmt" count="0"/>
-        <line num="41" type="stmt" count="0"/>
-        <metrics loc="45" ncloc="36" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
-      </file>
       <file name="/app/src/Infrastructure/Tasks/Observers/TaskObserver.php">
         <class name="Src\Infrastructure\Tasks\Observers\TaskObserver" namespace="Src\Infrastructure\Tasks\Observers">
           <metrics complexity="3" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="10" elements="18" coveredelements="12"/>
@@ -347,17 +223,6 @@
       </file>
     </package>
     <package name="Src\Infrastructure\Tasks\Repositories">
-      <file name="/app/src/Infrastructure/Tasks/Repositories/EloquentCommentTaskRepository.php">
-        <class name="Src\Infrastructure\Tasks\Repositories\EloquentCommentTaskRepository" namespace="Src\Infrastructure\Tasks\Repositories">
-          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
-        </class>
-        <line num="16" type="method" name="update" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="18" type="stmt" count="0"/>
-        <line num="20" type="stmt" count="0"/>
-        <line num="23" type="method" name="create" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="25" type="stmt" count="0"/>
-        <metrics loc="28" ncloc="28" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
-      </file>
       <file name="/app/src/Infrastructure/Tasks/Repositories/EloquentTaskRepository.php">
         <class name="Src\Infrastructure\Tasks\Repositories\EloquentTaskRepository" namespace="Src\Infrastructure\Tasks\Repositories">
           <metrics complexity="9" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="44" elements="54" coveredelements="50"/>
@@ -417,24 +282,6 @@
         <line num="95" type="stmt" count="5"/>
         <line num="96" type="stmt" count="5"/>
         <metrics loc="99" ncloc="99" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="44" elements="54" coveredelements="50"/>
-      </file>
-    </package>
-    <package name="Src\Infrastructure\Users\Models">
-      <file name="/app/src/Infrastructure/Users/Models/User.php">
-        <class name="Src\Infrastructure\Users\Models\User" namespace="Src\Infrastructure\Users\Models">
-          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
-        </class>
-        <line num="52" type="method" name="responsibleTasks" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="54" type="stmt" count="0"/>
-        <line num="55" type="stmt" count="0"/>
-        <line num="56" type="stmt" count="0"/>
-        <line num="57" type="stmt" count="0"/>
-        <line num="60" type="method" name="rapporteurTasks" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="62" type="stmt" count="0"/>
-        <line num="63" type="stmt" count="0"/>
-        <line num="64" type="stmt" count="0"/>
-        <line num="65" type="stmt" count="0"/>
-        <metrics loc="68" ncloc="52" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
       </file>
     </package>
     <package name="Src\Infrastructure\Users\Observers">
@@ -626,6 +473,6 @@
         <metrics loc="24" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
       </file>
     </package>
-    <metrics files="36" loc="1354" ncloc="1274" classes="32" methods="79" coveredmethods="54" conditionals="0" coveredconditionals="0" statements="307" coveredstatements="226" elements="386" coveredelements="280"/>
+    <metrics files="26" loc="962" ncloc="925" classes="22" methods="58" coveredmethods="51" conditionals="0" coveredconditionals="0" statements="237" coveredstatements="216" elements="295" coveredelements="267"/>
   </project>
 </coverage>

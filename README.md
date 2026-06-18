@@ -52,8 +52,6 @@ The application is separated into the following containers
         - cp docker/docker-compose-env/application.env.example docker/docker-compose-env/application.env
         - cp docker/docker-compose-env/ws-application.env.example docker/docker-compose-env/ws-application.env
         - cp docker/docker-compose-env/database.env.example docker/docker-compose-env/database.env
-        - cp docker/docker-compose-env/ws-application.env.example docker/docker-compose-env/
-        testing.env
         - cp docker/docker-compose-env/testing.env.example docker/docker-compose-env/testing.env
 
 2 - Check that the ports:
