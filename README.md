@@ -52,6 +52,9 @@ The application is separated into the following containers
         - cp docker/docker-compose-env/application.env.example docker/docker-compose-env/application.env
         - cp docker/docker-compose-env/ws-application.env.example docker/docker-compose-env/ws-application.env
         - cp docker/docker-compose-env/database.env.example docker/docker-compose-env/database.env
+        - cp docker/docker-compose-env/ws-application.env.example docker/docker-compose-env/
+        testing.env
+        - cp docker/docker-compose-env/testing.env.example docker/docker-compose-env/testing.env
 
 2 - Check that the ports:
 
@@ -69,6 +72,8 @@ The application is separated into the following containers
 
 
 3 - Enter the application's home directory and run the following commands:
+    
+    0 - docker compose up compiler;
     
     1 - docker compose up (to see the logs on stdout);
 
@@ -92,6 +97,7 @@ The application is separated into the following containers
     5 - for the framework to run the test suite.
         - Feature tests  
         - Unit tests
+    - docker compose up unit-tests
      
 
 ## Post Installation
