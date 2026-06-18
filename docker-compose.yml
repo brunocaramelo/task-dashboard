@@ -42,7 +42,7 @@ services:
         sh -c "
         php artisan config:clear &&
         php artisan cache:clear &&
-        php artisan test
+        php artisan test --coverage
         "
     profiles: ["testing"]
 
