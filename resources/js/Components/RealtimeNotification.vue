@@ -1,78 +1,83 @@
 <template>
+  <Toast position="top-right" group="task-notifications" />
 </template>
 
-<script>
-import { onMounted, ref  } from 'vue';
+<script setup>
+import { onMounted, onBeforeUnmount, ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
+import Toast from 'primevue/toast';
 
-export const RealtimeNotification = {
-    mounted() {
+defineOptions({
+  name: 'RealtimeNotification'
+});
 
-        const toast = useToast();
+const toast = useToast();
+let echoChannel = null;
+const isConnected = ref(false);
 
-        window.Echo.channel('task-channel')
-            .listen('.task.created', (e) => {
-                toast.add({
-                    severity: 'info',
-                    summary: 'Broadcast - Task Created',
-                    detail: e.message,
-                    life: 3000
-                });
+const showNotification = (severity, summary, detail) => {
+  toast.removeAllGroups();
 
-            }).error((err) => {
-                console.error('Subscription error:', err);
-            });
+  toast.add({
+    severity,
+    summary,
+    detail: detail || 'Sem detalhes',
+    life: 4000,
+    group: 'task-notifications',
+    closable: true
+  });
+};
 
-        window.Echo.channel('task-channel')
-            .listen('.task.updated', (e) => {
+const setupEcho = () => {
+  if (!window.Echo) {
+    console.warn('Echo if offline');
+    return;
+  }
 
-                toast.add({
-                    severity: 'info',
-                    summary: 'Broadcast - Task Updated',
-                    detail: e.message,
-                    life: 3000
-                });
+  try {
+    echoChannel = window.Echo.channel('task-channel');
 
-            }).error((err) => {
-                console.error('task.updated Subscription error:', err);
-            });
+    echoChannel.listen('.task.created', (e) => {
+        showNotification('success', 'New Task', e.message);
+      }).listen('.task.updated', (e) => {
+        showNotification('info', 'Updated task', e.message);
+      }).error((err) => {
+        console.error('Erro no canal:', err);
+        showNotification('error', 'Erro de Conexão', 'Falha no WebSocket');
+        isConnected.value = false;
+      });
 
-            // window.Echo.channel('comment-task-channel')
-            // .listen('.comment-task.created', (e) => {
-            //     toast.add({
-            //         severity: 'info',
-            //         summary: 'Broadcast - Comment Task Created',
-            //         detail: e.message,
-            //         life: 3000
-            //     });
+    isConnected.value = true;
+  } catch (error) {
+    console.error('Erro ao configurar Echo:', error);
+    showNotification('error', 'Erro de Configuração', 'Falha ao conectar ao WebSocket');
+  }
+};
 
-            // }).error((err) => {
-            //     console.error('Subscription error:', err);
-            // });
+onMounted(() => {
+  setupEcho();
+});
 
-            // window.Echo.channel('comment-task-channel')
-            // .listen('.comment-task.updated', (e) => {
-
-            //     toast.add({
-            //         severity: 'info',
-            //         summary: 'Broadcast - Comment Task Updated',
-            //         detail: e.message,
-            //         life: 3000
-            //     });
-
-            // }).error((err) => {
-            //     console.error('task.updated Subscription error:', err);
-            // });
-
-
-    },
-    beforeDestroy() {
-        setTimeout(() => {
-            if (window.Echo) {
-                window.Echo.disconnect();
-            }
-        }, 100);
+onBeforeUnmount(() => {
+  if (echoChannel) {
+    try {
+      echoChannel.stopListening('.task.created');
+      echoChannel.stopListening('.task.updated');
+      echoChannel.stopListening('.task.deleted');
+    } catch (error) {
+      console.error('Erro ao remover listeners:', error);
     }
-}
+  }
 
+  if (window.Echo) {
+    try {
+      window.Echo.disconnect();
+    } catch (error) {
+      console.error('Erro ao desconectar Echo:', error);
+    }
+  }
+
+  toast.removeAllGroups();
+  isConnected.value = false;
+});
 </script>

@@ -17,5 +17,7 @@ php artisan optimize
 
 php artisan db:seed
 
+php artisan cache:clear
+
 php artisan octane:frankenphp --port=$WEBSERVER_PORT
 
