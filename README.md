@@ -33,7 +33,7 @@ The application is separated into the following containers
 | postgres | postgres:15 | Main database |
 | php | php-app | Main Application (Web) |
 | websocket-server | php-cli | CLI Application running Reverb Websocket |
-| webserver and Vue 3 | dunglas/frankenphp:1.1.3-php8.3 | Web Server |
+| webserver and Vue 3 | dunglas/frankenphp:1.3.6-php8.4 | Web Server |
 
 ## Requirements
     - Docker
