@@ -54,6 +54,7 @@ The application is separated into the following containers
         - cp docker/docker-compose-env/testing.env.example docker/docker-compose-env/testing.env
 
 2 - Enter the application's home directory and run the following commands to install dependencies and build frontend files:
+
     - docker compose up compiler;
 
 3 - Check that the ports:
