@@ -74,7 +74,7 @@ The application is separated into the following containers
 
 3 - Enter the application's home directory and run the following commands:
     
-    1 - docker compose up (to see the logs on stdout);
+    1 - docker compose up;
 
      
 
