@@ -4,6 +4,9 @@ namespace Src\Presenter\Tasks\Controllers;
 
 use App\Http\Controllers\Controller;
 
+use Src\Presenter\Tasks\Requests\{TaskCreateRequest,
+                                 TaskUpdateRequest};
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -47,15 +50,15 @@ class TaskBoardController extends Controller
     public function createForm()
     {
         return Inertia::render('Tasks/New', [
-            'users' => $this->userSearchUseCase->execute([])->toArray(),
-            'statusList' => $this->getTaskStatusListUseCase->execute(false)->toArray(),
+            'users' => $this->userSearchUseCase->execute([]),
+            'statusList' => $this->getTaskStatusListUseCase->execute(false),
             'csrfToken' => csrf_token(),
         ]);
     }
 
     public function create(TaskCreateRequest $request)
     {
-        $response = $this->taskService->create($request->validated());
+        $response = $this->createTaskUseCase->execute($request->validated());
 
         return response()->json([
             'status' => 'success',
@@ -63,12 +66,13 @@ class TaskBoardController extends Controller
             'data' => $response,
             ], 201);
     }
+
     public function updateForm($id)
     {
         return Inertia::render('Tasks/Edit', [
             'users' => $this->userSearchUseCase->execute([]),
             'statusList' => $this->getTaskStatusListUseCase->execute(false),
-            'task' => $this->getTaskByIdUseCase->execute($id)->toArray(),
+            'task' => $this->getTaskByIdUseCase->execute($id),
             'csrfToken' => csrf_token(),
         ]);
     }

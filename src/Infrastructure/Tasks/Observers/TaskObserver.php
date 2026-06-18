@@ -5,7 +5,7 @@ namespace Src\Infrastructure\Tasks\Observers;
 use App\Actions\Cache\{CleanCacheByTagAndKeysAction,
                        CleanCacheByTagsAction};
 
-use App\Models\Task;
+use Src\Infrastructure\Tasks\Models\Task;
 
 class TaskObserver
 {

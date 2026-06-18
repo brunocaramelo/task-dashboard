@@ -20,7 +20,7 @@ class TaskUpdatedSend implements ShouldBroadcastNow
 
     public function __construct($task)
     {
-        $currentUser = \Auth::user();
+        $currentUser = auth()->user();
 
         $message = <<<EOT
         Task [$task->code] has updated

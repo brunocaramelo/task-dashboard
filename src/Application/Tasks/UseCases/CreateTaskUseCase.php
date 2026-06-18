@@ -5,7 +5,8 @@ namespace Src\Application\Tasks\UseCases;
 use Src\Domain\Tasks\Interfaces\TaskRepositoryInterface;
 use Src\Application\Tasks\Dto\TaskDto;
 
-use Src\Infrastructure\Tasks\Events\TaskUpdatedSend;
+use Src\Infrastructure\Tasks\Events\TaskCreatedSend;
+
 
 class CreateTaskUseCase
 {
@@ -15,10 +16,10 @@ class CreateTaskUseCase
 
     public function execute(array $data) : TaskDto
     {
-        $task = $this->repository->update($data);
+        $task = $this->repository->create($data);
 
         broadcast(
-            new TaskUpdatedSend($task)
+            new TaskCreatedSend($task)
         );
 
         return $task;

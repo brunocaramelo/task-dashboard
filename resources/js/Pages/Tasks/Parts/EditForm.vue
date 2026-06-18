@@ -1,6 +1,6 @@
 <template>
             <div class="row">
-                <h1>Task: {{ task.data.code }}</h1>
+                <h1>Task: {{ task.code }}</h1>
                 <div class="grid grid-cols-4 gap-4">
                     <div>
                         <InputLabel for="title" value="Title" />
@@ -21,7 +21,7 @@
                         <InputLabel for="rapporteur" value="Rapporteur" />
                         <select v-model="formUpdateStore.dataToSend.rapporteur_id" id="rapporteur" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <option value="" disabled>Select a user</option>
-                            <option v-for="user in dataToFillForm.users.data" :key="user.id" :value="user.id">
+                            <option v-for="user in dataToFillForm.users" :key="user.id" :value="user.id">
                                 {{ user.name }}
                             </option>
                         </select>
@@ -32,7 +32,7 @@
                         <InputLabel for="responsible" value="Responsible" />
                         <select v-model="formUpdateStore.dataToSend.responsible_id" id="responsible" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <option value="" disabled>Select a user</option>
-                            <option v-for="user in dataToFillForm.users.data" :key="user.id" :value="user.id">
+                            <option v-for="user in dataToFillForm.users" :key="user.id" :value="user.id">
                                 {{ user.name }}
                             </option>
                         </select>
@@ -43,7 +43,7 @@
                         <InputLabel for="status_id" value="Status" />
                         <select v-model="formUpdateStore.dataToSend.status_id" id="status_id" class="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <option value="" disabled>Select a user</option>
-                            <option v-for="user in dataToFillForm.statusList.data" :key="user.id" :value="user.id">
+                            <option v-for="user in dataToFillForm.statusList" :key="user.id" :value="user.id">
                                 {{ user.name }}
                             </option>
                         </select>
@@ -95,8 +95,8 @@
 
     const formUpdateStore = useUpdateTaskStore();
 
-    formUpdateStore.setRoute(route("tasks.send-update", { id: props.task.data.id}));
-    formUpdateStore.setInitialData(props.task.data);
+    formUpdateStore.setRoute(route("tasks.send-update", { id: props.task.id}));
+    formUpdateStore.setInitialData(props.task);
     formUpdateStore.setCsrfToken(props.csrfToken);
 
     watch( () => formUpdateStore.responseSuccess, (newValue) => {

@@ -2,7 +2,7 @@
 
 namespace Src\Infrastructure\Tasks\Observers;
 
-use App\Models\CommentTask;
+use Src\Infrastructure\Tasks\Models\CommentTask;
 
 use App\Actions\Cache\CleanCacheByTagAndKeysAction;
 

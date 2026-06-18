@@ -29,6 +29,14 @@ export const useCreateStoreStore = defineStore('createTask', () => {
         routeSuccess.value = name;
     };
 
+    const setInitialData = () => {
+        dataToSend.value.title = null;
+        dataToSend.value.rapporteur_id = null;
+        dataToSend.value.responsible_id = null;
+        dataToSend.value.description = null;
+        dataToSend.value.status_id = null;
+    };
+
     const setCsrfToken = (name) => {
         csrfToken.value = name;
     };
@@ -112,5 +120,6 @@ export const useCreateStoreStore = defineStore('createTask', () => {
         onSubmit,
         responseSuccess,
         errorsResponse,
+        setInitialData,
     };
 });

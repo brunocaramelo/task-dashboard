@@ -5,7 +5,8 @@ namespace Src\Application\Tasks\UseCases;
 use Src\Domain\Tasks\Interfaces\TaskRepositoryInterface;
 use Src\Application\Tasks\Dto\TaskDto;
 
-use Src\Infrastructure\Tasks\Events\TaskCreatedSend;
+use Src\Infrastructure\Tasks\Events\TaskUpdatedSend;
+
 
 class UpdateTaskUseCase
 {
@@ -18,7 +19,7 @@ class UpdateTaskUseCase
         $task = $this->repository->update($data, $id);
 
         broadcast(
-            new TaskCreatedSend($task)
+            new TaskUpdatedSend($task)
         );
 
         return $task;

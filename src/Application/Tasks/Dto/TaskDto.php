@@ -14,13 +14,13 @@ use Src\Application\Users\Dto\UserDto;
 class TaskDto extends Data
 {
     public function __construct(
-        public ?string $id,
+        public ?int $id,
         public ?string $title,
         public ?string $code,
-        public ?string $rapporteur_id,
-        public ?string $responsible_id,
-        public ?string $author_id,
-        public ?string $status_id,
+        public ?int $rapporteur_id,
+        public ?int $responsible_id,
+        public ?int $author_id,
+        public ?int $status_id,
         public ?string $description,
         public ?string $created_at,
         public ?StatusTaskDto $status,

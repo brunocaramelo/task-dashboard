@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { z } from 'zod';
 
-export const useUpdateTaskStore = defineStore('createTask', () => {
+export const useUpdateTaskStore = defineStore('updateTask', () => {
 
     const processing = ref(false);
 
@@ -30,6 +30,8 @@ export const useUpdateTaskStore = defineStore('createTask', () => {
     };
 
     const setInitialData = (data) => {
+        console.log('setInitialData');
+        console.log(data);
         dataToSend.value.title = data.title;
         dataToSend.value.rapporteur_id = data.rapporteur_id;
         dataToSend.value.responsible_id = data.responsible_id;
